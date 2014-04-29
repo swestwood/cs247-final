@@ -1,6 +1,0 @@
-The website is on the gh-pages branch. Do:
-
-git checkout gh-pages
-git pull
-... make changes, add, commit ... 
-git push origin gh-pages
