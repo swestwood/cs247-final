@@ -10,7 +10,7 @@ app_jquery_loading_script.src = "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jq
 app_jquery_loading_script.onload = function() {
 
     var frame = $("<iframe/>");
-    frame.attr("src", "//localhost:5000/bookmarklet/app.html?chatterid=" + app_unique_page_id);
+    frame.attr("src", "//sidenote.herokuapp.com/bookmarklet/app.html?chatterid=" + app_unique_page_id);
 
     var frameWidth = "400px";
 
@@ -35,7 +35,7 @@ app_jquery_loading_script.onload = function() {
     window.onbeforeunload = function() {
         // console.log("before unloading")
         // $.ajax({ /* //app-name.herokuapp.com */
-        //   url: '//localhost:5000/delete_peer',
+        //   url: '////sidenote.herokuapp.com/delete_peer',
         //   type: "POST",
         //   data: {
         //       page_id: app_unique_page_id
