@@ -10,41 +10,88 @@
   App = (function() {
     function App(elem) {
       this.elem = elem;
-      this.init = __bind(this.init, this);
-      this.setupInitialUI = __bind(this.setupInitialUI, this);
-      this.setupSidenoteMetadata = __bind(this.setupSidenoteMetadata, this);
+      this.showSidenote = __bind(this.showSidenote, this);
+      this.showGroupAndUserName = __bind(this.showGroupAndUserName, this);
+      this.showSetGroupAndUser = __bind(this.showSetGroupAndUser, this);
+      this.fetchGroupAndUserFromLocalStorage = __bind(this.fetchGroupAndUserFromLocalStorage, this);
+      this.setupUrlInfo = __bind(this.setupUrlInfo, this);
       this.userName = "unknown";
       this.groupName = "unknown";
-      this.setupSidenoteMetadata();
-      this.setupInitialUI();
+      this.setupUrlInfo();
+      if (!this.fetchGroupAndUserFromLocalStorage()) {
+        $(".sidenote-app-content").hide();
+        this.showSetGroupAndUser();
+      } else {
+        this.showSidenote();
+      }
+    }
+
+    "Grab Sidenote data from the site page and cookies.";
+
+    App.prototype.setupUrlInfo = function() {
+      this.urlId = null;
+      this.pageId = window.location.toString().split("?")[1].split("=")[1];
+      console.log(window.location.toString());
+      this.rawUrl = document.referrer;
+      return console.log("Raw URL: " + this.rawUrl);
+    };
+
+    App.prototype.fetchGroupAndUserFromLocalStorage = function() {
+      this.groupName = localStorage.groupName;
+      this.userName = localStorage.userName;
+      console.log("GROUP NAME: " + this.groupName);
+      console.log("USER NAME: " + this.userName);
+      if (_.isEmpty(this.groupName) || _.isEmpty(this.userName)) {
+        return false;
+      }
+      return true;
+    };
+
+    App.prototype.showSetGroupAndUser = function() {
+      var _this = this;
+      $(".sidenote-app-content").hide();
+      $('.set-group-user-wrapper').html(Templates["setGroupAndUserArea"]()).show();
+      return $(".done-inputting-info").click(function(evt) {
+        var inputtedGroup, inputtedUser;
+        console.log("inputted info");
+        inputtedUser = $(".user-name-input").val();
+        inputtedGroup = $(".group-name-input").val();
+        if (_.isEmpty(inputtedUser) || _.isEmpty(inputtedGroup)) {
+          $(".input-info-error").html("You need to enter both a user and a group. Use 'testergroup' as a test group if you like.");
+          return;
+        }
+        console.log("set cookie");
+        localStorage.userName = inputtedUser;
+        localStorage.groupName = inputtedGroup;
+        if (!_this.fetchGroupAndUserFromLocalStorage()) {
+          console.error("Something went wrong with setting local storage..");
+          return;
+        }
+        return _this.showSidenote();
+      });
+    };
+
+    App.prototype.showGroupAndUserName = function() {
+      var _this = this;
+      this.elem.find(".group-name").html(this.groupName);
+      this.elem.find(".user-name").html(this.userName);
+      return this.elem.find(".change-user-group").click(function(evt) {
+        console.log("change!");
+        return _this.showSetGroupAndUser();
+      });
+    };
+
+    App.prototype.showSidenote = function() {
+      $(".sidenote-app-content").html(Templates["sidenoteAppContent"]());
+      this.showGroupAndUserName();
       this.fbInteractor = new FirebaseInteractor(this.groupName, this.rawUrl);
       this.fbInteractor.init();
       this.messageRecorder = new MessageRecorder($('.record-message-wrapper'), this.fbInteractor, this.userName, this.rawUrl);
       this.messageList = new MessageList($('.messages-area-wrapper'), this.fbInteractor);
       this.groupFeed = new GroupFeed($('.group-feed-wrapper'), this.fbInteractor);
-    }
-
-    "Grab Sidenote data from the site page and cookies.";
-
-    App.prototype.setupSidenoteMetadata = function() {
-      this.urlId = null;
-      this.pageId = window.location.toString().split("?")[1].split("=")[1];
-      console.log(window.location.toString());
-      this.rawUrl = document.referrer;
-      console.log("Raw URL: " + this.rawUrl);
-      console.log("PAGE ID: " + this.pageId);
-      this.groupName = "testergroup";
-      this.userName = "sophia";
-      return console.log("COOKIE: " + document.cookie);
+      $('.set-group-user-wrapper').hide();
+      return $(".sidenote-app-content").show();
     };
-
-    App.prototype.setupInitialUI = function() {
-      this.elem.find(".group-name").html(this.groupName);
-      this.elem.find(".user-name").html(this.userName);
-      return $('#welcome').addClass('animated slideInDown');
-    };
-
-    App.prototype.init = function() {};
 
     return App;
 
@@ -237,12 +284,12 @@
       this.groupName = groupName;
       this.rawUrl = rawUrl;
       this.init = __bind(this.init, this);
-      this.hashUrl = __bind(this.hashUrl, this);
+      this.hashString = __bind(this.hashString, this);
       this.fb_instance = new Firebase("https://sidenote.firebaseio.com");
-      console.log("hash url: " + this.hashUrl(this.rawUrl));
+      console.log("hash url: " + this.hashString(this.rawUrl));
     }
 
-    FirebaseInteractor.prototype.hashUrl = function(s) {
+    FirebaseInteractor.prototype.hashString = function(s) {
       console.log('hashing: ' + s);
       return s.split("").reduce(function(a, b) {
         a = ((a << 5) - a) + b.charCodeAt(0);
@@ -252,9 +299,9 @@
 
     FirebaseInteractor.prototype.init = function() {
       console.log(this.fb_instance);
-      this.fb_new_chat_room = this.fb_instance.child('chatrooms').child(this.groupName);
+      this.fb_new_chat_room = this.fb_instance.child('chatrooms').child(this.hashString(this.groupName));
       this.fb_instance_stream = this.fb_new_chat_room.child('stream');
-      return this.fb_page_videos = this.fb_new_chat_room.child('page_videos').child(this.hashUrl(this.rawUrl));
+      return this.fb_page_videos = this.fb_new_chat_room.child('page_videos').child(this.hashString(this.rawUrl));
     };
 
     return FirebaseInteractor;
@@ -263,8 +310,7 @@
 
   $(document).ready(function() {
     var app;
-    app = new App($(".sidenote-container"));
-    return app.init();
+    return app = new App($(".sidenote-container"));
   });
 
 }).call(this);

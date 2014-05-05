@@ -21,6 +21,7 @@ window.enableButtons = (toEnable, toDisable) ->
   for button in toDisable
     enableButton(button, false)
 
+
 class window.VideoDisplay
 
   @createVideoElem: (video_data) =>

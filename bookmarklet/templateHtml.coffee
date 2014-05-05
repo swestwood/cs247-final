@@ -4,6 +4,53 @@ This is a hack to avoid having to manually pre-compile the Handlebars templates.
 
 window.buildTemplates = =>
   
+  sidenoteAppContent = """
+
+  <div class="sidenote-metadata-wrapper">
+      <div class="group-name-wrapper">
+          Your group is <span class="group-name">(none)</span>
+      </div>
+      <div class="user-name-wrapper">
+          and you are <span class="user-name">(unknown)</span>
+      </div>
+      <div class="metadata-problem-instructions">
+      <div class="change-user-group">Change?</div>
+      </div>
+  </div>
+
+  <div class="record-message-wrapper">
+  </div>
+
+  <div class="messages-area-wrapper">
+      <div class="messages-area">
+          <div class="messages-area-title">Website messages from group</div>
+          <div id="messages-container"></div>
+      </div>
+  </div>
+
+
+  <div class="group-feed-wrapper">
+      <div class="group-feed-area">
+          <div class="group-feed-area-title">Recent group activity</div>
+          <div class="group-feed-container"></div>
+      </div>
+  </div>
+  """
+
+  setGroupAndUserArea = """
+  <div class="set-group-and-user">
+    <div>Name? <input type="text" class="user-name-input" placeholder="What's your name?"></div>
+    <div>Group? <input type="text" class="group-name-input" placeholder="Name your group!"></div>
+    <p>You can share video messages with anybody in this group. Use the same group as a friend, or
+    come up with a new name and share it with friends.</p>
+    <p>You need to have cookies enabled to save your group info.</p>
+    <button class="done-inputting-info">Done!</button>
+    <div class="input-info-error"> </div>
+  </div
+
+
+  """
+
   messageFeedElem = """
   <div class="message-feed-elem">
     New message from {{user}} at <a href="{{rawUrl}}" target="_blank">{{rawUrl}}</a>
@@ -13,7 +60,6 @@ window.buildTemplates = =>
   recordMessageArea = """
   <div class="record-message-area">
       <div class="record-message-container">
-          <button class="record-button">Record a message for this site</button>
           <div class="webcam_stream_container">
             <div id="webcam_stream">
                 <div id="sample-user-container">
@@ -23,6 +69,7 @@ window.buildTemplates = =>
                 </div>
             </div>
           </div>
+          <button class="record-button">Record a message for this site</button>
           <div class="record-controls-wrapper">
           </div>
       </div>
@@ -42,6 +89,8 @@ window.buildTemplates = =>
 
   # Add any new templates to this dictionary so that they get compiled.
   handlebarsElems = 
+    "sidenoteAppContent": sidenoteAppContent
+    "setGroupAndUserArea": setGroupAndUserArea
     "recordMessageArea": recordMessageArea
     "recordMessageControls": recordMessageControls
     "messageFeedElem": messageFeedElem

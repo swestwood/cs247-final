@@ -9,34 +9,71 @@ class App
   constructor: (@elem) ->
     @userName = "unknown"
     @groupName = "unknown"
-    @setupSidenoteMetadata()
-    @setupInitialUI()
-    @fbInteractor = new FirebaseInteractor(@groupName, @rawUrl)
-    @fbInteractor.init()
-    @messageRecorder = new MessageRecorder($('.record-message-wrapper'), @fbInteractor, @userName, @rawUrl)
-    @messageList = new MessageList($('.messages-area-wrapper'), @fbInteractor)
-    @groupFeed = new GroupFeed($('.group-feed-wrapper'), @fbInteractor)
-    
+    @setupUrlInfo()
+
+    if not @fetchGroupAndUserFromLocalStorage()
+      $(".sidenote-app-content").hide()
+      @showSetGroupAndUser()
+    else
+      @showSidenote()
+
 
   """Grab Sidenote data from the site page and cookies."""
-  setupSidenoteMetadata: =>
+  setupUrlInfo: =>
     @urlId = null
     @pageId = window.location.toString().split("?")[1].split("=")[1]
     console.log window.location.toString()
     @rawUrl = document.referrer  # window.parent.location is blocked (XSS)
     console.log "Raw URL: " + @rawUrl
-    console.log "PAGE ID: " + @pageId
-    # TODO code these into the app -- get it out of a cookie
-    @groupName = "testergroup"
-    @userName = "sophia"
-    console.log("COOKIE: " + document.cookie)
 
-  setupInitialUI: =>
+  fetchGroupAndUserFromLocalStorage: =>
+    @groupName = localStorage.groupName
+    @userName = localStorage.userName
+    console.log "GROUP NAME: " + @groupName
+    console.log "USER NAME: " + @userName
+    if _.isEmpty(@groupName) or _.isEmpty(@userName)
+      return false
+    return true
+
+  showSetGroupAndUser: =>
+    $(".sidenote-app-content").hide()
+    $('.set-group-user-wrapper').html(Templates["setGroupAndUserArea"]()).show()
+    $(".done-inputting-info").click (evt) =>
+      console.log("inputted info")
+      inputtedUser = $(".user-name-input").val()
+      inputtedGroup = $(".group-name-input").val()
+      if _.isEmpty(inputtedUser) or _.isEmpty(inputtedGroup)
+        $(".input-info-error").html("You need to enter both a user and a group. Use 'testergroup' as a test group if you like.")
+        return  # Cannot be empty
+      console.log "set cookie"
+      localStorage.userName = inputtedUser
+      localStorage.groupName = inputtedGroup
+      if not @fetchGroupAndUserFromLocalStorage()
+        console.error("Something went wrong with setting local storage..")
+        return
+      @showSidenote()
+
+
+  showGroupAndUserName: =>
     @elem.find(".group-name").html(@groupName)
     @elem.find(".user-name").html(@userName)
-    $('#welcome').addClass('animated slideInDown')
+    @elem.find(".change-user-group").click (evt) =>
+      console.log "change!"
+      @showSetGroupAndUser()
+    
+  showSidenote: =>
+    $(".sidenote-app-content").html(Templates["sidenoteAppContent"]())
+    @showGroupAndUserName()
+    @fbInteractor = new FirebaseInteractor(@groupName, @rawUrl)
+    @fbInteractor.init()
+    @messageRecorder = new MessageRecorder($('.record-message-wrapper'), @fbInteractor, @userName, @rawUrl)
+    @messageList = new MessageList($('.messages-area-wrapper'), @fbInteractor)
+    @groupFeed = new GroupFeed($('.group-feed-wrapper'), @fbInteractor)
 
-  init: =>
+    $('.set-group-user-wrapper').hide()
+    $(".sidenote-app-content").show()
+
+
 
 class window.GroupFeed
 
@@ -170,9 +207,9 @@ class window.FirebaseInteractor
   """Connects to Firebase and connects to chatroom variables."""
   constructor: (@groupName, @rawUrl) ->
     @fb_instance = new Firebase("https://sidenote.firebaseio.com")
-    console.log "hash url: " + @hashUrl(@rawUrl)
+    console.log "hash url: " + @hashString(@rawUrl)
 
-  hashUrl: (s) =>
+  hashString: (s) =>
     console.log 'hashing: '+ s
     # From http://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript-jquery
     return s.split("").reduce (a,b) ->
@@ -183,14 +220,12 @@ class window.FirebaseInteractor
   init: =>
     console.log @fb_instance
     # set up variables to access firebase data structure
-    @fb_new_chat_room = @fb_instance.child('chatrooms').child(@groupName)
+    @fb_new_chat_room = @fb_instance.child('chatrooms').child(@hashString(@groupName))   # Hash the group name so that we can allow spaces.
     @fb_instance_stream = @fb_new_chat_room.child('stream')   # TODO implement a limit
-    @fb_page_videos = @fb_new_chat_room.child('page_videos').child(@hashUrl(@rawUrl))
+    @fb_page_videos = @fb_new_chat_room.child('page_videos').child(@hashString(@rawUrl))
 
 
 
 $(document).ready ->
-
   app = new App($(".sidenote-container"))
-  app.init()
 
