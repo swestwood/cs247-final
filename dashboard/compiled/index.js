@@ -2,6 +2,8 @@
 (function() {
   var _this = this;
 
-  $(document).ready(function() {});
+  $(document).ready(function() {
+    return document.cookie = 'groupname=testgroupthing; expires=Thu, 2 Aug 2015 20:47:11 UTC; path=/';
+  });
 
 }).call(this);

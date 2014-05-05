@@ -8,6 +8,9 @@ server = require('http').createServer(app)
 
 app.use(logfmt.requestLogger())
 app.use(express.bodyParser())
+# TODO check if this works?
+# app.use(require('less-middleware')({ src: path.join(__dirname, 'bookmarklet/css') }));
+
 
 # Helper Functions
 

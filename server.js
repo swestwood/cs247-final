@@ -55,14 +55,12 @@
   });
 
   app.post('/new_peer', function(req, res) {
-    var result;
     if (!req.body.hasOwnProperty("full_url") || !req.body.hasOwnProperty("page_id")) {
       res.send(500, {
         error: "Must specify full_url and page_id parameters"
       });
       return;
     }
-    result = onPeerConnected(req.body.full_url, req.body.page_id);
     return res.send(JSON.stringify(result));
   });
 

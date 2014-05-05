@@ -3,6 +3,7 @@
 <head>
 <title>Sidenote Dashboard</title>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
 <script src="/dashboard/library/handlebars.runtime-v1.3.0.js"></script>
 <script src="/dashboard/compiled/example.js"></script>
 <link rel="stylesheet" href="../bookmarklet/css/bootstrap.min.css" type="text/css">
@@ -67,8 +68,8 @@
             <div class="starting-instructions">
                 <h1>Drag this into your bookmarks bar:</h1>
                             <!-- TODO change to Heroku when deploying - will work for HTTPS as well then. -->
-                    <a class="bookmarklet-link" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='//sidenote.herokuapp.com/bookmarklet/bookmarklet.js';})();" onclick="return false">Open Project</a>
-<!--                     <a class="bookmarklet-link" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='//localhost:5000/bookmarklet/bookmarklet.js';})();" onclick="return false">Project</a> -->
+                    <!-- <a class="bookmarklet-link" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='//sidenote.herokuapp.com/bookmarklet/bookmarklet.js';})();" onclick="return false">Open Project</a> -->
+                    <a class="bookmarklet-link" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='//localhost:5000/bookmarklet/bookmarklet.js';})();" onclick="return false">Project</a>
 
                 </h3>
                 <h4> </h4>
@@ -82,8 +83,8 @@
                 <div class="col-md-12">
                     <div class="starting-instructions">
                         <h2>Then go to a website.</h2>
-                        <h4><a href="http://www.wikipedia.org">Try Wikipedia, for example</a></h4>
                         <h3>Make sure to click the bookmarklet once you're there.</h3>
+                        <h4><a href="http://www.wikipedia.org">Try Wikipedia, for example</a></h4>
                     </div>
                 </div>
             </div>
