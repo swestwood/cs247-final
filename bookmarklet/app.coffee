@@ -220,7 +220,9 @@ class window.FirebaseInteractor
   init: =>
     console.log @fb_instance
     # set up variables to access firebase data structure
-    @fb_new_chat_room = @fb_instance.child('chatrooms').child(@hashString(@groupName))   # Hash the group name so that we can allow spaces.
+    # Hash the group name so that we can allow spaces. Group names are CASE INSENSITIVE and ignore beginning/trailing whitespace
+    console.log @groupName.toLowerCase().trim()
+    @fb_new_chat_room = @fb_instance.child('chatrooms').child(@hashString(@groupName.toLowerCase().trim()))
     @fb_instance_stream = @fb_new_chat_room.child('stream')   # TODO implement a limit
     @fb_page_videos = @fb_new_chat_room.child('page_videos').child(@hashString(@rawUrl))
 

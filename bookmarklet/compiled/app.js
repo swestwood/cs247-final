@@ -299,7 +299,8 @@
 
     FirebaseInteractor.prototype.init = function() {
       console.log(this.fb_instance);
-      this.fb_new_chat_room = this.fb_instance.child('chatrooms').child(this.hashString(this.groupName));
+      console.log(this.groupName.toLowerCase().trim());
+      this.fb_new_chat_room = this.fb_instance.child('chatrooms').child(this.hashString(this.groupName.toLowerCase().trim()));
       this.fb_instance_stream = this.fb_new_chat_room.child('stream');
       return this.fb_page_videos = this.fb_new_chat_room.child('page_videos').child(this.hashString(this.rawUrl));
     };
