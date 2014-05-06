@@ -31,7 +31,7 @@ class App
     @userName = localStorage.userName
     console.log "GROUP NAME: " + @groupName
     console.log "USER NAME: " + @userName
-    if _.isEmpty(@groupName) or _.isEmpty(@userName)
+    if _.isEmpty(@groupName.trim()) or _.isEmpty(@userName.trim())
       return false
     return true
 
@@ -40,8 +40,8 @@ class App
     $('.set-group-user-wrapper').html(Templates["setGroupAndUserArea"]()).show()
     $(".done-inputting-info").click (evt) =>
       console.log("inputted info")
-      inputtedUser = $(".user-name-input").val()
-      inputtedGroup = $(".group-name-input").val()
+      inputtedUser = $(".user-name-input").val().trim()
+      inputtedGroup = $(".group-name-input").val().trim()
       if _.isEmpty(inputtedUser) or _.isEmpty(inputtedGroup)
         $(".input-info-error").html("You need to enter both a user and a group. Use 'testergroup' as a test group if you like.")
         return  # Cannot be empty

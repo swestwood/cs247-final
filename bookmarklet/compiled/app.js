@@ -41,7 +41,7 @@
       this.userName = localStorage.userName;
       console.log("GROUP NAME: " + this.groupName);
       console.log("USER NAME: " + this.userName);
-      if (_.isEmpty(this.groupName) || _.isEmpty(this.userName)) {
+      if (_.isEmpty(this.groupName.trim()) || _.isEmpty(this.userName.trim())) {
         return false;
       }
       return true;
@@ -54,8 +54,8 @@
       return $(".done-inputting-info").click(function(evt) {
         var inputtedGroup, inputtedUser;
         console.log("inputted info");
-        inputtedUser = $(".user-name-input").val();
-        inputtedGroup = $(".group-name-input").val();
+        inputtedUser = $(".user-name-input").val().trim();
+        inputtedGroup = $(".group-name-input").val().trim();
         if (_.isEmpty(inputtedUser) || _.isEmpty(inputtedGroup)) {
           $(".input-info-error").html("You need to enter both a user and a group. Use 'testergroup' as a test group if you like.");
           return;
