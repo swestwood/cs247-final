@@ -217,14 +217,26 @@ class window.FirebaseInteractor
       return Math.abs(a&a)
     ,0
 
+  getKeyFromRawUrl: (url) =>
+    url = getStringWithoutInitial(url, "https://")
+    url = getStringWithoutInitial(url, "http://")
+    url = getStringWithoutInitial(url, "www.")
+    url = getStringWithoutTrailing(url, "/")
+    url = getStringWithoutTrailing(url, "/#")
+    return url
+
   init: =>
     console.log @fb_instance
     # set up variables to access firebase data structure
     # Hash the group name so that we can allow spaces. Group names are CASE INSENSITIVE and ignore beginning/trailing whitespace
-    console.log @groupName.toLowerCase().trim()
-    @fb_new_chat_room = @fb_instance.child('chatrooms').child(@hashString(@groupName.toLowerCase().trim()))
+    groupNameFbKey = @hashString(@groupName.toLowerCase().trim())
+    @fb_new_chat_room = @fb_instance.child('chatrooms').child(groupNameFbKey)
     @fb_instance_stream = @fb_new_chat_room.child('stream')   # TODO implement a limit
-    @fb_page_videos = @fb_new_chat_room.child('page_videos').child(@hashString(@rawUrl))
+
+    # Set the room key as the trimmed rawUrl, but do not update the rawUrl itself so that links involving it still work.
+    rawUrlFbKey = @hashString(@getKeyFromRawUrl(@rawUrl))
+    console.log "Raw URL key: " + rawUrlFbKey
+    @fb_page_videos = @fb_new_chat_room.child('page_videos').child(rawUrlFbKey)
 
 
 

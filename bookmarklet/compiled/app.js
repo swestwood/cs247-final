@@ -284,6 +284,7 @@
       this.groupName = groupName;
       this.rawUrl = rawUrl;
       this.init = __bind(this.init, this);
+      this.getKeyFromRawUrl = __bind(this.getKeyFromRawUrl, this);
       this.hashString = __bind(this.hashString, this);
       this.fb_instance = new Firebase("https://sidenote.firebaseio.com");
       console.log("hash url: " + this.hashString(this.rawUrl));
@@ -297,12 +298,24 @@
       }, 0);
     };
 
+    FirebaseInteractor.prototype.getKeyFromRawUrl = function(url) {
+      url = getStringWithoutInitial(url, "https://");
+      url = getStringWithoutInitial(url, "http://");
+      url = getStringWithoutInitial(url, "www.");
+      url = getStringWithoutTrailing(url, "/");
+      url = getStringWithoutTrailing(url, "/#");
+      return url;
+    };
+
     FirebaseInteractor.prototype.init = function() {
+      var groupNameFbKey, rawUrlFbKey;
       console.log(this.fb_instance);
-      console.log(this.groupName.toLowerCase().trim());
-      this.fb_new_chat_room = this.fb_instance.child('chatrooms').child(this.hashString(this.groupName.toLowerCase().trim()));
+      groupNameFbKey = this.hashString(this.groupName.toLowerCase().trim());
+      this.fb_new_chat_room = this.fb_instance.child('chatrooms').child(groupNameFbKey);
       this.fb_instance_stream = this.fb_new_chat_room.child('stream');
-      return this.fb_page_videos = this.fb_new_chat_room.child('page_videos').child(this.hashString(this.rawUrl));
+      rawUrlFbKey = this.hashString(this.getKeyFromRawUrl(this.rawUrl));
+      console.log("Raw URL key: " + rawUrlFbKey);
+      return this.fb_page_videos = this.fb_new_chat_room.child('page_videos').child(rawUrlFbKey);
     };
 
     return FirebaseInteractor;

@@ -21,6 +21,22 @@ window.enableButtons = (toEnable, toDisable) ->
   for button in toDisable
     enableButton(button, false)
 
+"""Remove toRemove from the start of origString if it is there, return the new string.
+  I.e., strip "https://" from a url.
+"""
+window.getStringWithoutInitial = (origString, toRemove) =>
+  if origString.indexOf(toRemove) == 0
+    origString = origString.slice(toRemove.length)
+  return origString
+
+"""Remove toRemove from the end of origString if it is there, return the new string.
+  Ie strip "/#" from the end of a url.
+"""
+window.getStringWithoutTrailing = (origString, toRemove) =>
+  if origString.indexOf(toRemove, origString.length - toRemove.length) != -1
+    origString = origString.slice(0, origString.length - toRemove.length)
+  return origString
+
 
 class window.VideoDisplay
 
