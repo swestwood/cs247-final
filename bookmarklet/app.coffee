@@ -43,7 +43,7 @@ class App
       inputtedUser = $(".user-name-input").val().trim()
       inputtedGroup = $(".group-name-input").val().trim()
       if _.isEmpty(inputtedUser) or _.isEmpty(inputtedGroup)
-        $(".input-info-error").html("You need to enter both a user and a group. Use 'testergroup' as a test group if you like.")
+        $(".input-info-error").html("You need to enter both a user and a group.")
         return  # Cannot be empty
       console.log "set cookie"
       localStorage.userName = inputtedUser
@@ -102,8 +102,9 @@ class window.MessageList
   addMessage: (data) =>
     [source, video] = VideoDisplay.createVideoElem(data.videoBlob)
     video.appendChild(source)
-    @messageList.append("<h4>" + data.user  + "</h4>")
-    document.getElementById("messages-container").appendChild(video)
+    $("#messages-container").prepend(video)
+    @messageList.prepend("<h4>" + data.user  + "</h4>")
+    # document.getElementById("messages-container").appendChild(video)
 
 
 class window.MessageRecorder

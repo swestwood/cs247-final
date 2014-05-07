@@ -57,7 +57,7 @@
         inputtedUser = $(".user-name-input").val().trim();
         inputtedGroup = $(".group-name-input").val().trim();
         if (_.isEmpty(inputtedUser) || _.isEmpty(inputtedGroup)) {
-          $(".input-info-error").html("You need to enter both a user and a group. Use 'testergroup' as a test group if you like.");
+          $(".input-info-error").html("You need to enter both a user and a group.");
           return;
         }
         console.log("set cookie");
@@ -142,8 +142,8 @@
       var source, video, _ref;
       _ref = VideoDisplay.createVideoElem(data.videoBlob), source = _ref[0], video = _ref[1];
       video.appendChild(source);
-      this.messageList.append("<h4>" + data.user + "</h4>");
-      return document.getElementById("messages-container").appendChild(video);
+      $("#messages-container").prepend(video);
+      return this.messageList.prepend("<h4>" + data.user + "</h4>");
     };
 
     return MessageList;
