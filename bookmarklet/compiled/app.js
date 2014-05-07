@@ -37,8 +37,8 @@
     };
 
     App.prototype.fetchGroupAndUserFromLocalStorage = function() {
-      this.groupName = localStorage.groupName;
-      this.userName = localStorage.userName;
+      this.groupName = localStorage.groupName || "";
+      this.userName = localStorage.userName || "";
       console.log("GROUP NAME: " + this.groupName);
       console.log("USER NAME: " + this.userName);
       if (_.isEmpty(this.groupName.trim()) || _.isEmpty(this.userName.trim())) {

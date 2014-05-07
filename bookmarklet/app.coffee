@@ -27,8 +27,8 @@ class App
     console.log "Raw URL: " + @rawUrl
 
   fetchGroupAndUserFromLocalStorage: =>
-    @groupName = localStorage.groupName
-    @userName = localStorage.userName
+    @groupName = localStorage.groupName || ""
+    @userName = localStorage.userName || ""  # Fetch if it exists, otherwise set to empty string
     console.log "GROUP NAME: " + @groupName
     console.log "USER NAME: " + @userName
     if _.isEmpty(@groupName.trim()) or _.isEmpty(@userName.trim())
