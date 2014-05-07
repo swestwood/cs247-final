@@ -14,7 +14,7 @@ window.buildTemplates = =>
           and you are <span class="user-name">(unknown)</span>
       </div>
       <div class="metadata-problem-instructions">
-      <div class="change-user-group">Change?</div>
+      <span class="change-user-group">Change name or group?</span>
       </div>
   </div>
 
@@ -42,8 +42,8 @@ window.buildTemplates = =>
     <div>Name? <input type="text" class="user-name-input" placeholder="What's your name?"></div>
     <div>Group? <input type="text" class="group-name-input" placeholder="Name your group!"></div>
     <p>You can share video messages with anybody in this group. Use the same group as a friend, or
-    come up with a new name and share it with friends.</p>
-    <p>You need to have cookies enabled to save your group info.</p>
+    come up with a new name and share it with others.</p>
+    <p>Try using <strong>247</strong> as a group name!</p>
     <button class="done-inputting-info">Done!</button>
     <div class="input-info-error"> </div>
   </div
