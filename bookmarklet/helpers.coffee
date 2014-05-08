@@ -12,8 +12,10 @@ window.MAX_VIDEO_LENGTH_MS = 30 * 1000  # 30 seconds
 window.enableButton = (button, isEnabled) ->
   if isEnabled
     $(button).removeAttr('disabled');
+    $(button).show()
   else
     $(button).attr('disabled', 'disabled')
+    $(button).hide()
 
 window.enableButtons = (toEnable, toDisable) ->
   for button in toEnable

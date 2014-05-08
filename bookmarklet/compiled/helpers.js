@@ -8,9 +8,11 @@
 
   window.enableButton = function(button, isEnabled) {
     if (isEnabled) {
-      return $(button).removeAttr('disabled');
+      $(button).removeAttr('disabled');
+      return $(button).show();
     } else {
-      return $(button).attr('disabled', 'disabled');
+      $(button).attr('disabled', 'disabled');
+      return $(button).hide();
     }
   };
 

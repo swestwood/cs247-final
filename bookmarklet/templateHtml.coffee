@@ -82,10 +82,9 @@ window.buildTemplates = =>
   recordMessageControls = """
   <div class="record-message-controls-container">
     <button class="record-start-button">Start</button>
-      <p>Start new recording (max 30 seconds)</p>
-    <button class="record-stop-button">Post</button>
-      <p>Done, post message!</p>
-    <button class="record-bail-button">Oops, bail out.</button>
+    <button class="record-stop-button">Done, post!</button>
+    <button class="record-bail-button">Oops, discard.</button>
+    <p>Recordings can be max 30 seconds.</p>
     <span class="record-overtime-error-message"></span>
   </div>
   """
