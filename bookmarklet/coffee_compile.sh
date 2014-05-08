@@ -1,1 +1,1 @@
-coffee -cwo . *.coffee
+coffee -cwo compiled *.coffee
