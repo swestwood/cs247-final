@@ -1,0 +1,98 @@
+body {
+    text-align: center;
+    /*font-family: Open Sans;*/
+}
+p {
+    margin-top: 20px;
+}
+h1 {
+    font-weight: bold;
+    margin-top: -10px;
+    font-family: 'Shadows Into Light', sans-serif;
+    font-size: 60px;
+}
+
+#sidenote-content {
+    background: linear-gradient(#bdedff, white);
+    border: none;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    animation-duration: .8s;
+    -webkit-animation-duration: .8s;
+    -moz-animation-duration: .8s;
+}
+.metadata-problem-instructions {
+    font-size: 70%;
+}
+.group-name-wrapper, .user-name-wrapper {
+    display: inline-block;
+}
+.group-name, .user-name {
+    font-weight: 600;
+}
+.messages-area-title {
+    font-size: 120%;
+}
+.recording-error-message, .record-overtime-error-message, .input-info-error {
+    color: red;
+}
+.metadata-problem-instructions {
+    padding-bottom: 10px;
+    padding-top: 2px;
+}
+.change-user-group {
+    cursor: pointer;
+    font-weight: 200;
+    color: #26c6ff;
+}
+.allow {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.record-start-button {
+
+}
+
+.user {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+.sample-user.place-user {
+    margin-left: 10px;
+}
+.sample-user.place-user i {
+    font-size: 100px;
+    padding: 25px;
+}
+.sample-user {
+    color: #333;
+    /*background-color: lightblue;*/
+}
+.message-feed-elem {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.waiting-message {
+    margin: 20px;
+}
+
+.their-video {
+    width: 170px;
+    height: auto;
+}
+.record-button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#video-container {
+    display: none;
+}
+
+#setup-error {
+    display: none;
+}

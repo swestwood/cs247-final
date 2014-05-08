@@ -1,0 +1,73 @@
+.header {
+    height: 220px;
+    background-attachment:fixed;
+    position: relative;
+}
+
+h2 {
+    font-size: 20px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+img {
+    float:left;
+}
+
+.number-circle {
+    margin-left: -80px;
+    margin-top: -20px;
+}
+
+.bookmarklet {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px 40px;
+    height: 100%;
+    width: 500px;
+}
+
+.bookmarklet-link {
+    /*padding: 10px;*/
+    /*background-color: blue;*/
+    /*margin: 0 50px 0px 100px;*/
+    display: block;
+    float:left;
+    float:top;
+    margin-top: 80px;
+    margin-right: 10px;
+    color: purple;
+    font-weight: bold;
+    text-align: center;
+    cursor: url(https://mail.google.com/mail/images/2/openhand.cur), default !important;
+    font-size: 28px;
+}
+
+.bookmarklet-link:hover {
+    text-decoration: none;
+    color: #0057A3;
+}
+
+.drag-me-link {
+    text-align: center;
+    vertical-align: center;
+    font-size: 50px;
+    padding-left: 40%;
+    padding-top: 10px;
+}
+
+.starting-instructions {
+    vertical-align: center;
+    /*text-align: center;*/
+    margin-left: 30%;
+
+}
+
+.link {
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    color: #666;
+}

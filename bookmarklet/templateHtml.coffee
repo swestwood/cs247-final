@@ -7,23 +7,25 @@ window.buildTemplates = =>
   sidenoteAppContent = """
 
   <div class="sidenote-metadata-wrapper">
-      <div class="group-name-wrapper">
-          Your group is <span class="group-name">(none)</span>
-      </div>
       <div class="user-name-wrapper">
-          and you are <span class="user-name">(unknown)</span>
+          Hey there <span class="user-name">(unknown)</span>,
+      </div>
+      <div class="group-name-wrapper">
+          you're in the group <span class="group-name">(none)</span>.
       </div>
       <div class="metadata-problem-instructions">
-      <span class="change-user-group">Change name or group?</span>
+      <span class="change-user-group">change name or group</span>
       </div>
   </div>
+  
+  <p>When Firefox prompts you, click "Share Selected Devices" to use our video chat.</p>
 
   <div class="record-message-wrapper">
   </div>
 
   <div class="messages-area-wrapper">
       <div class="messages-area">
-          <div class="messages-area-title">Website messages from group</div>
+          <div class="messages-area-title">Messages</div>
           <div id="messages-container"></div>
       </div>
   </div>
@@ -39,12 +41,11 @@ window.buildTemplates = =>
 
   setGroupAndUserArea = """
   <div class="set-group-and-user">
-    <div>Name? <input type="text" class="user-name-input" placeholder="What's your name?"></div>
-    <div>Group? <input type="text" class="group-name-input" placeholder="Name your group!"></div>
-    <p>You can share video messages with anybody in this group. Use the same group as a friend, or
-    come up with a new name and share it with others.</p>
-    <p>Try using <strong>247</strong> as a group name!</p>
-    <button class="done-inputting-info">Done!</button>
+    <div><input type="text" class="user-name-input" placeholder="Name"></div>
+    <div><input type="text" class="group-name-input" placeholder="Group"></div>
+    <p>You'll share video messages within your group.</p>
+    <p>Try the group name <strong>247</strong>.</p>
+    <button class="done-inputting-info">Done</button>
     <div class="input-info-error"> </div>
   </div
 
@@ -53,7 +54,7 @@ window.buildTemplates = =>
 
   messageFeedElem = """
   <div class="message-feed-elem">
-    New message from {{user}} at <a href="{{rawUrl}}" target="_blank">{{rawUrl}}</a>
+    {{user}} posted on <a href="{{rawUrl}}" target="_blank">{{rawUrl}}</a>
   </div>
   """
 
@@ -64,7 +65,7 @@ window.buildTemplates = =>
             <div id="webcam_stream">
                 <div id="sample-user-container">
                     <div class="sample-user place-user">
-                        <i class="fa fa-user"></i>
+                        <img class="allow" src="../bookmarklet/library/allow-me.png" alt="allow me" width="300">
                     </div>
                 </div>
             </div>
@@ -79,8 +80,10 @@ window.buildTemplates = =>
   # Treat these as HTML files
   recordMessageControls = """
   <div class="record-message-controls-container">
-    <button class="record-start-button">Start new recording (max 30 seconds)</button>
-    <button class="record-stop-button">Done, post message!</button>
+    <button class="record-start-button">Start</button>
+      <p>Start new recording (max 30 seconds)</p>
+    <button class="record-stop-button">Post</button>
+      <p>Done, post message!</p>
     <button class="record-bail-button">Oops, bail out.</button>
     <span class="record-overtime-error-message"></span>
   </div>

@@ -10,8 +10,8 @@ app_jquery_loading_script.src = "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jq
 app_jquery_loading_script.onload = function() {
 
     var frame = $("<iframe/>");
-    frame.attr("src", "//sidenote.herokuapp.com/bookmarklet/app.html?chatterid=" + app_unique_page_id);
-    // frame.attr("src", "//localhost:5000/bookmarklet/app.html?chatterid=" + app_unique_page_id);
+    //frame.attr("src", "//sidenote.herokuapp.com/bookmarklet/app.html?chatterid=" + app_unique_page_id);
+    frame.attr("src", "//localhost:5000/bookmarklet/app.html?chatterid=" + app_unique_page_id);
 
     var frameWidth = "400px";
 
