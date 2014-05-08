@@ -99,7 +99,7 @@ class window.VideoRecorder
     # adds these properties to the video
     video = mergeProps(video, {
         # controls: true,
-        muted: false,
+        muted: true,
         width: @videoWidth,
         height: @videoHeight,
         src: URL.createObjectURL(videoStream)

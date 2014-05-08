@@ -108,7 +108,7 @@
       video = document.createElement('video');
       webcam_stream.innerHTML = "";
       video = mergeProps(video, {
-        muted: false,
+        muted: true,
         width: this.videoWidth,
         height: this.videoHeight,
         src: URL.createObjectURL(videoStream)
