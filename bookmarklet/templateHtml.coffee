@@ -43,7 +43,7 @@ window.buildTemplates = =>
     <div><input type="text" class="user-name-input" placeholder="Name"></div>
     <div><input type="text" class="group-name-input" placeholder="Group"></div>
     <p>You'll share video messages within your group.</p>
-    <p>Try the group name <strong>247</strong>.</p>
+    <p>Try the group name <strong>CS247</strong>.</p>
     <button class="done-inputting-info">Done</button>
     <div class="input-info-error"> </div>
   </div
