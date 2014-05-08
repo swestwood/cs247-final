@@ -124,11 +124,13 @@ class window.MessageRecorder
   respondRecordClick: (evt) =>
     @recordButton.hide()
     if not @videoRecorder.webcamConnected
+      $("#sharing-video-help").show()
       @videoRecorder.connectWebcam(@showRecordingControls, @respondRecordingError)
     else
       console.log "webcam already connected"
 
   showRecordingControls: (videoStream) =>
+    $("#sharing-video-help").hide()
     @recorderControls = new MessageRecorderControls($(@elem.find(".record-controls-wrapper")), @videoRecorder, videoStream, @videoReadyCallback)
 
   respondRecordingError: =>
