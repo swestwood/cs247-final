@@ -18,7 +18,6 @@ window.buildTemplates = =>
       </div>
   </div>
   
-  <p>When Firefox prompts you, click "Share Selected Devices" to use our video chat.</p>
 
   <div class="record-message-wrapper">
   </div>
@@ -61,18 +60,20 @@ window.buildTemplates = =>
   recordMessageArea = """
   <div class="record-message-area">
       <div class="record-message-container">
+          <button class="record-button">Record a message</button>
           <div class="webcam_stream_container">
             <div id="webcam_stream">
                 <div id="sample-user-container">
-                    <div class="sample-user place-user">
-                        <img class="allow" src="../bookmarklet/library/allow-me.png" alt="allow me" width="300">
-                    </div>
+                  <div id="sharing-video-help" style="display:none">
+                      <p>Click "Share Selected Devices" to use our video chat.</p>
+                      <div class="sample-user place-user">
+                          <img class="allow" src="../bookmarklet/library/allow-me.png" alt="allow me" width="300" \>
+                      </div>
+                  </div>
                 </div>
             </div>
           </div>
-          <button class="record-button">Record a message for this site</button>
-          <div class="record-controls-wrapper">
-          </div>
+          <div class="record-controls-wrapper"></div>
       </div>
   </div>
   """
