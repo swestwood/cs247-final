@@ -37,8 +37,8 @@
     };
 
     App.prototype.fetchGroupAndUserFromLocalStorage = function() {
-      this.groupName = localStorage.groupName || "";
-      this.userName = localStorage.userName || "";
+      this.groupName = _.escape(localStorage.groupName || "");
+      this.userName = _.escape(localStorage.userName || "");
       console.log("GROUP NAME: " + this.groupName);
       console.log("USER NAME: " + this.userName);
       if (_.isEmpty(this.groupName.trim()) || _.isEmpty(this.userName.trim())) {
@@ -61,8 +61,8 @@
           return;
         }
         console.log("set cookie");
-        localStorage.userName = inputtedUser;
-        localStorage.groupName = inputtedGroup;
+        localStorage.userName = _.escape(inputtedUser);
+        localStorage.groupName = _.escape(inputtedGroup);
         if (!_this.fetchGroupAndUserFromLocalStorage()) {
           console.error("Something went wrong with setting local storage..");
           return;
@@ -73,8 +73,8 @@
 
     App.prototype.showGroupAndUserName = function() {
       var _this = this;
-      this.elem.find(".group-name").html(this.groupName);
-      this.elem.find(".user-name").html(this.userName);
+      this.elem.find(".group-name").html(_.escape(this.groupName));
+      this.elem.find(".user-name").html(_.escape(this.userName));
       return this.elem.find(".change-user-group").click(function(evt) {
         console.log("change!");
         return _this.showSetGroupAndUser();

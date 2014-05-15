@@ -25,10 +25,11 @@ class App
     console.log window.location.toString()
     @rawUrl = document.referrer  # window.parent.location is blocked (XSS)
     console.log "Raw URL: " + @rawUrl
+    # console.log "TITLE: " + window.parent.window.title  # blocked
 
   fetchGroupAndUserFromLocalStorage: =>
-    @groupName = localStorage.groupName || ""
-    @userName = localStorage.userName || ""  # Fetch if it exists, otherwise set to empty string
+    @groupName = _.escape(localStorage.groupName || "")
+    @userName = _.escape(localStorage.userName || "")  # Fetch if it exists, otherwise set to empty string
     console.log "GROUP NAME: " + @groupName
     console.log "USER NAME: " + @userName
     if _.isEmpty(@groupName.trim()) or _.isEmpty(@userName.trim())
@@ -46,8 +47,8 @@ class App
         $(".input-info-error").html("You need to enter both a user and a group.")
         return  # Cannot be empty
       console.log "set cookie"
-      localStorage.userName = inputtedUser
-      localStorage.groupName = inputtedGroup
+      localStorage.userName = _.escape(inputtedUser)
+      localStorage.groupName = _.escape(inputtedGroup)
       if not @fetchGroupAndUserFromLocalStorage()
         console.error("Something went wrong with setting local storage..")
         return
@@ -55,8 +56,8 @@ class App
 
 
   showGroupAndUserName: =>
-    @elem.find(".group-name").html(@groupName)
-    @elem.find(".user-name").html(@userName)
+    @elem.find(".group-name").html(_.escape(@groupName))
+    @elem.find(".user-name").html(_.escape(@userName))
     @elem.find(".change-user-group").click (evt) =>
       console.log "change!"
       @showSetGroupAndUser()
