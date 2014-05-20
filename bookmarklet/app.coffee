@@ -46,7 +46,6 @@ class App
       if _.isEmpty(inputtedUser) or _.isEmpty(inputtedGroup)
         $(".input-info-error").html("You need to enter both a user and a group.")
         return  # Cannot be empty
-      console.log "set cookie"
       localStorage.userName = _.escape(inputtedUser)
       localStorage.groupName = _.escape(inputtedGroup)
       if not @fetchGroupAndUserFromLocalStorage()
@@ -59,7 +58,6 @@ class App
     @elem.find(".group-name").html(_.escape(@groupName))
     @elem.find(".user-name").html(_.escape(@userName))
     @elem.find(".change-user-group").click (evt) =>
-      console.log "change!"
       @showSetGroupAndUser()
     
   showSidenote: =>
@@ -68,8 +66,9 @@ class App
     @fbInteractor = new FirebaseInteractor(@groupName, @rawUrl)
     @fbInteractor.init()
     @messageRecorder = new MessageRecorder($('.record-message-wrapper'), @fbInteractor, @userName, @rawUrl)
-    @messageList = new MessageList($('.messages-area-wrapper'), @fbInteractor)
-    @groupFeed = new GroupFeed($('.group-feed-wrapper'), @fbInteractor)
+    @timestampUpdater = new TimestampUpdater()
+    @messageList = new MessageList($('.messages-area-wrapper'), @fbInteractor, @timestampUpdater)
+    @groupFeed = new GroupFeed($('.group-feed-wrapper'), @fbInteractor, @timestampUpdater)
 
     $('.set-group-user-wrapper').hide()
     $(".sidenote-app-content").show()
@@ -78,22 +77,28 @@ class App
 
 class window.GroupFeed
 
-  constructor: (@elem, @fbInteractor) ->
+  constructor: (@elem, @fbInteractor, @timestampUpdater) ->
     @messageFeed = @elem.find(".group-feed-container")
     @fbInteractor.fb_instance_stream.on "child_added", (snapshot) =>
       if snapshot and snapshot.val()
         @addFeedElem(snapshot.val())
 
+
+
   addFeedElem: (data) =>
+    feedTimestampClass = "feedtime-"+Math.floor(Math.random()*100000000)
     context =
       user: data.user
       rawUrl: data.rawUrl
+      time:  if data.timestampMS then @timestampUpdater.timestampToOutputString(data.timestampMS) else "unknown time";
+      feedtimeClass: feedTimestampClass
+
     @messageFeed.prepend(Templates['messageFeedElem'](context))
-        
+    @timestampUpdater.addToUpdateMap(feedTimestampClass, data.timestampMS)
 
 class window.MessageList
 
-  constructor: (@elem, @fbInteractor) ->
+  constructor: (@elem, @fbInteractor, @timestampUpdater) ->
     @messageList = @elem.find("#messages-container")
 
     @fbInteractor.fb_page_videos.on "child_added", (snapshot) =>
@@ -101,11 +106,14 @@ class window.MessageList
         @addMessage(snapshot.val())
 
   addMessage: (data) =>
+    messageTimestampClass = "messagetime-"+Math.floor(Math.random()*100000000)
+    # TODO this should really be a handlebars template
     [source, video] = VideoDisplay.createVideoElem(data.videoBlob)
     video.appendChild(source)
     $("#messages-container").prepend(video)
-    @messageList.prepend("<h4>" + data.user  + "</h4>")
-    # document.getElementById("messages-container").appendChild(video)
+    time = if data.timestampMS then @timestampUpdater.timestampToOutputString(data.timestampMS) else "unknown time";
+    @messageList.prepend("<h4>" + data.user  + "</h4> <div class='" + messageTimestampClass + "'>" + time + "</div>")
+    @timestampUpdater.addToUpdateMap(messageTimestampClass, data.timestampMS)
 
 
 class window.MessageRecorder
@@ -142,9 +150,29 @@ class window.MessageRecorder
 
   videoReadyCallback: (videoBlob) =>
     console.log "video ready to show"
-    @fbInteractor.fb_page_videos.push({videoBlob: videoBlob, user: @userName})
-    @fbInteractor.fb_instance_stream.push({rawUrl: @rawUrl, user: @userName})
+    @fbInteractor.fb_page_videos.push({videoBlob: videoBlob, user: @userName, timestampMS: (new Date()).toString()})
+    @fbInteractor.fb_instance_stream.push({rawUrl: @rawUrl, user: @userName,  timestampMS: (new Date()).toString()})
     @setInitialState()
+
+class window.TimestampUpdater
+
+  constructor: ->
+    @updateTimeMap = {}
+
+    setInterval =>
+      for className, timestamp of @updateTimeMap
+        timeElem = $("." + className)
+        continue if not timeElem
+        newTime = if timestamp then @timestampToOutputString(timestamp) else "unknown time";
+        $(timeElem).html(newTime)
+    , (1000*30) # Update the times every 30 sec
+
+
+  addToUpdateMap: (className, rawTimestamp) =>
+    @updateTimeMap[className] = rawTimestamp
+
+  timestampToOutputString: (timestampMS) =>
+    return moment(Date.parse(timestampMS)).fromNow()
 
 class window.MessageRecorderControls
 

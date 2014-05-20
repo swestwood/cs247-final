@@ -60,7 +60,6 @@
           $(".input-info-error").html("You need to enter both a user and a group.");
           return;
         }
-        console.log("set cookie");
         localStorage.userName = _.escape(inputtedUser);
         localStorage.groupName = _.escape(inputtedGroup);
         if (!_this.fetchGroupAndUserFromLocalStorage()) {
@@ -76,7 +75,6 @@
       this.elem.find(".group-name").html(_.escape(this.groupName));
       this.elem.find(".user-name").html(_.escape(this.userName));
       return this.elem.find(".change-user-group").click(function(evt) {
-        console.log("change!");
         return _this.showSetGroupAndUser();
       });
     };
@@ -87,8 +85,9 @@
       this.fbInteractor = new FirebaseInteractor(this.groupName, this.rawUrl);
       this.fbInteractor.init();
       this.messageRecorder = new MessageRecorder($('.record-message-wrapper'), this.fbInteractor, this.userName, this.rawUrl);
-      this.messageList = new MessageList($('.messages-area-wrapper'), this.fbInteractor);
-      this.groupFeed = new GroupFeed($('.group-feed-wrapper'), this.fbInteractor);
+      this.timestampUpdater = new TimestampUpdater();
+      this.messageList = new MessageList($('.messages-area-wrapper'), this.fbInteractor, this.timestampUpdater);
+      this.groupFeed = new GroupFeed($('.group-feed-wrapper'), this.fbInteractor, this.timestampUpdater);
       $('.set-group-user-wrapper').hide();
       return $(".sidenote-app-content").show();
     };
@@ -98,10 +97,11 @@
   })();
 
   window.GroupFeed = (function() {
-    function GroupFeed(elem, fbInteractor) {
+    function GroupFeed(elem, fbInteractor, timestampUpdater) {
       var _this = this;
       this.elem = elem;
       this.fbInteractor = fbInteractor;
+      this.timestampUpdater = timestampUpdater;
       this.addFeedElem = __bind(this.addFeedElem, this);
       this.messageFeed = this.elem.find(".group-feed-container");
       this.fbInteractor.fb_instance_stream.on("child_added", function(snapshot) {
@@ -112,12 +112,16 @@
     }
 
     GroupFeed.prototype.addFeedElem = function(data) {
-      var context;
+      var context, feedTimestampClass;
+      feedTimestampClass = "feedtime-" + Math.floor(Math.random() * 100000000);
       context = {
         user: data.user,
-        rawUrl: data.rawUrl
+        rawUrl: data.rawUrl,
+        time: data.timestampMS ? this.timestampUpdater.timestampToOutputString(data.timestampMS) : "unknown time",
+        feedtimeClass: feedTimestampClass
       };
-      return this.messageFeed.prepend(Templates['messageFeedElem'](context));
+      this.messageFeed.prepend(Templates['messageFeedElem'](context));
+      return this.timestampUpdater.addToUpdateMap(feedTimestampClass, data.timestampMS);
     };
 
     return GroupFeed;
@@ -125,10 +129,11 @@
   })();
 
   window.MessageList = (function() {
-    function MessageList(elem, fbInteractor) {
+    function MessageList(elem, fbInteractor, timestampUpdater) {
       var _this = this;
       this.elem = elem;
       this.fbInteractor = fbInteractor;
+      this.timestampUpdater = timestampUpdater;
       this.addMessage = __bind(this.addMessage, this);
       this.messageList = this.elem.find("#messages-container");
       this.fbInteractor.fb_page_videos.on("child_added", function(snapshot) {
@@ -139,11 +144,14 @@
     }
 
     MessageList.prototype.addMessage = function(data) {
-      var source, video, _ref;
+      var messageTimestampClass, source, time, video, _ref;
+      messageTimestampClass = "messagetime-" + Math.floor(Math.random() * 100000000);
       _ref = VideoDisplay.createVideoElem(data.videoBlob), source = _ref[0], video = _ref[1];
       video.appendChild(source);
       $("#messages-container").prepend(video);
-      return this.messageList.prepend("<h4>" + data.user + "</h4>");
+      time = data.timestampMS ? this.timestampUpdater.timestampToOutputString(data.timestampMS) : "unknown time";
+      this.messageList.prepend("<h4>" + data.user + "</h4> <div class='" + messageTimestampClass + "'>" + time + "</div>");
+      return this.timestampUpdater.addToUpdateMap(messageTimestampClass, data.timestampMS);
     };
 
     return MessageList;
@@ -197,16 +205,53 @@
       console.log("video ready to show");
       this.fbInteractor.fb_page_videos.push({
         videoBlob: videoBlob,
-        user: this.userName
+        user: this.userName,
+        timestampMS: (new Date()).toString()
       });
       this.fbInteractor.fb_instance_stream.push({
         rawUrl: this.rawUrl,
-        user: this.userName
+        user: this.userName,
+        timestampMS: (new Date()).toString()
       });
       return this.setInitialState();
     };
 
     return MessageRecorder;
+
+  })();
+
+  window.TimestampUpdater = (function() {
+    function TimestampUpdater() {
+      this.timestampToOutputString = __bind(this.timestampToOutputString, this);
+      this.addToUpdateMap = __bind(this.addToUpdateMap, this);
+      var _this = this;
+      this.updateTimeMap = {};
+      setInterval(function() {
+        var className, newTime, timeElem, timestamp, _ref, _results;
+        _ref = _this.updateTimeMap;
+        _results = [];
+        for (className in _ref) {
+          timestamp = _ref[className];
+          timeElem = $("." + className);
+          if (!timeElem) {
+            continue;
+          }
+          newTime = timestamp ? _this.timestampToOutputString(timestamp) : "unknown time";
+          _results.push($(timeElem).html(newTime));
+        }
+        return _results;
+      }, 1000 * 30);
+    }
+
+    TimestampUpdater.prototype.addToUpdateMap = function(className, rawTimestamp) {
+      return this.updateTimeMap[className] = rawTimestamp;
+    };
+
+    TimestampUpdater.prototype.timestampToOutputString = function(timestampMS) {
+      return moment(Date.parse(timestampMS)).fromNow();
+    };
+
+    return TimestampUpdater;
 
   })();
 
