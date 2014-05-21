@@ -21,7 +21,7 @@ class App
   """Grab Sidenote data from the site page and cookies."""
   setupUrlInfo: =>
     @urlId = null
-    @pageId = window.location.toString().split("?")[1].split("=")[1]
+    # @pageId = window.location.toString().split("?")[1].split("=")[1]  # Grabs info from the url, hacky
     console.log window.location.toString()
     @rawUrl = document.referrer  # window.parent.location is blocked (XSS)
     console.log "Raw URL: " + @rawUrl
@@ -87,9 +87,16 @@ class window.GroupFeed
 
   addFeedElem: (data) =>
     feedTimestampClass = "feedtime-"+Math.floor(Math.random()*100000000)
+    # truncate doc title if needed
+    titleToDisplay = data.rawUrl # Take the document title, or the raw URL if one does not exist.
+    if data.documentTitle
+      titleLen = data.documentTitle.length
+      # Truncate the title if necessary
+      titleToDisplay = if titleLen < 40 then data.documentTitle else data.documentTitle.slice(0, 31) + "..." + data.documentTitle.slice(titleLen - 6, titleLen)
     context =
       user: data.user
       rawUrl: data.rawUrl
+      documentTitle: titleToDisplay
       time:  if data.timestampMS then @timestampUpdater.timestampToOutputString(data.timestampMS) else "unknown time";
       feedtimeClass: feedTimestampClass
 
@@ -151,7 +158,7 @@ class window.MessageRecorder
   videoReadyCallback: (videoBlob) =>
     console.log "video ready to show"
     @fbInteractor.fb_page_videos.push({videoBlob: videoBlob, user: @userName, timestampMS: (new Date()).toString()})
-    @fbInteractor.fb_instance_stream.push({rawUrl: @rawUrl, user: @userName,  timestampMS: (new Date()).toString()})
+    @fbInteractor.fb_instance_stream.push({rawUrl: @rawUrl, user: @userName,  timestampMS: (new Date()).toString(), documentTitle: parentPageDocumentTitle || ""})
     @setInitialState()
 
 class window.TimestampUpdater
@@ -272,6 +279,18 @@ class window.FirebaseInteractor
 
 
 
+# Do this on window scope outside of document ready so that we register the listener immediately
+iframeMessageReceiver = (e) =>
+  console.log "MESSAGE RECEIVED"
+  if (e.origin == '*')
+    return
+  console.log(e.data)
+  window.parentPageDocumentTitle = e.data  # Set a global var
+
+window.addEventListener('message', iframeMessageReceiver, false);
+
+
 $(document).ready ->
   app = new App($(".sidenote-container"))
+
 

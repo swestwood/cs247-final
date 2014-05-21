@@ -54,7 +54,7 @@ window.buildTemplates = =>
   messageFeedElem = """
   <div class="message-feed-elem">
     <div class="feed-timestamp {{feedtimeClass}}">{{time}}</div>
-    {{user}} posted on <a href="{{rawUrl}}" target="_blank">{{rawUrl}}</a>
+    {{user}} posted on <a href="{{rawUrl}}" target="_blank">{{documentTitle}}</a>
   </div>
   """
 
