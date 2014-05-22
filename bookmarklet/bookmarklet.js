@@ -23,9 +23,9 @@ app_jquery_loading_script.onload = function() {
         bottom: 0,
         right: 0,
         resize: "none",
-        border-left-style: solid,
-        border-left-width: 1px,
-        border-left-color: black,
+        'border-left-style': 'solid',
+        'border-left-width': '1px',
+        'border-left-color': 'black',
         zIndex: 2147483647,
         width: frameWidth,
         height: "100%"
