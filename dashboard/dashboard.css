@@ -27,18 +27,33 @@ figure {
     padding: 5px;
 }
 
+.screenshot {
+    max-width: 300px;
+    border: solid;
+    border-width: 1px;
+    border-color:#26c6ff;
+    bbox-shadow: 10px 10px 5px #888888;
+}
+
 .container {
     display: table;
 }
 
 .sidebar {
     display: table-cell;
-    width:270px;
+    width:400px;
     top:0px;
     left:20px;
     bottom:0px;
     position:absolute;
     background-color: #e9f9ff;
+    z-index: 10;
+}
+
+#left-screenshot {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #sidebar-title {
@@ -46,12 +61,23 @@ figure {
     font-size: 40px;
     margin-left: 10px;
     margin-right: 10px;
+    margin-top: 8px;
+}
+
+#sidebar-tagline {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: -20px;
+    font-size: 20px;
+    text-align: center;
 }
 
 #sidebar-text {
-    margin-left: 20px;
-    margin-right: 20px;
-    font-size: 24px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 25px;
+    font-size: 12px;
+    text-align: justify;
 }
 
 .main-content {
@@ -119,6 +145,7 @@ figure {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
 }
 
 .site-preview-thumb:hover {

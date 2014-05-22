@@ -63,8 +63,8 @@ button {
 }
 
 .record-message-wrapper {
-    position:fixed;
-    margin-top: 100px;
+    position: fixed;
+    margin-top: 90px;
     margin-left: auto;
     margin-right: auto;
     background-color:white;
