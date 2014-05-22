@@ -70,8 +70,8 @@ class window.VideoRecorder
   constructor: ->
     @curVideoBlob = null
     @webcamConnected = false
-    @videoWidth = 270  # 340
-    @videoHeight = 200  # 255
+    @videoWidth = 202  # 340
+    @videoHeight = 150  # 255
 
   connectWebcam: (successCallback, failureCallback) =>
     # whether to record video/audio

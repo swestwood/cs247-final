@@ -24,32 +24,38 @@ window.buildTemplates = =>
 
   <div class="lower-section">
 
-  <div class="messages-area-wrapper">
-      <div class="messages-area">
-          <div class="messages-area-title">Messages</div>
-          <div class="message-container-outer">
-            <div class="message-container-inner">
-              <div id="messages-container"></div>
-            </div>
+  <div class="tab-button-area">
+    <button onclick="$('.messages-area-wrapper').show(); $('.group-feed-wrapper').hide(); ">See Messages</button>
+    <button onclick="$('.messages-area-wrapper').hide(); $('.group-feed-wrapper').show();" >See Group Activity</button>
+  </div>
+    <div class="lower-section-content">
+      <div class="messages-area-wrapper">
+          <div class="messages-area">
+              <div class="messages-area-title">Messages</div>
+              <div class="message-container-outer">
+                <div class="message-container-inner">
+                  <div id="messages-container"></div>
+                </div>
+              </div>
           </div>
       </div>
-  </div>
 
 
-  <div class="group-feed-wrapper">
-      <div class="group-feed-area">
-          <div class="group-feed-area-title">Group Activity</div>
-          <div class="group-feed-container"></div>
+      <div class="group-feed-wrapper" style="display:none">
+          <div class="group-feed-area">
+              <div class="group-feed-area-title">Group Activity</div>
+              <div class="group-feed-container"></div>
+          </div>
       </div>
-  </div>
 
+    </div>
   </div>
   """
 
   # Video element sets the width so that the rerender jumping happens vertically, not horizontally, which arguably
   # looks a bit better.
   videoElement = """
-  <video class="{{videoElemClass}}" controls="true" width=250><source src="{{videoUrl}}" type="video/webm"></video>
+  <video class="{{videoElemClass}}" controls="true" width=200><source src="{{videoUrl}}" type="video/webm"></video>
   """
 
   # Video message elem guesses at the video height (seems to be working) again to help with the jumping in rerendering.
@@ -60,7 +66,7 @@ window.buildTemplates = =>
       <div class="vid-message-user">{{videoUser}}</div>
       <div class="vid-message-timestamp {{messageTimestampClass}}">{{time}}</div>
     </div>
-    <div class="vid_wrapper  {{videoWrapperClass}}" style="min-height:205px">
+    <div class="vid_wrapper  {{videoWrapperClass}}" style="min-height:145px">
  
     </div>
   </div>
@@ -96,7 +102,7 @@ window.buildTemplates = =>
                   <div id="sharing-video-help" style="display:none">
                       <p>Click "Share Selected Devices" to use our video chat.</p>
                       <div class="sample-user place-user">
-                          <img class="allow" src="../bookmarklet/library/allow-me.png" alt="allow me" width="300" \>
+                          <img class="allow" src="../bookmarklet/library/allow-me.png" alt="allow me" width="240" \>
                       </div>
                   </div>
                 </div>
@@ -110,10 +116,9 @@ window.buildTemplates = =>
   # Treat these as HTML files
   recordMessageControls = """
   <div class="record-message-controls-container">
-    <button class="record-start-button">Start</button>
+    <button class="record-start-button">Start (max 30 seconds)</button>
     <button class="record-stop-button">Done, post!</button>
     <button class="record-bail-button">Oops, discard.</button>
-    <p>Recordings can be max 30 seconds.</p>
     <span class="record-overtime-error-message"></span>
   </div>
   """
