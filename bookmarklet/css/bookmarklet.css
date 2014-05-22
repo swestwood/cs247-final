@@ -45,12 +45,12 @@ button {
 
 .sidenote-metadata-wrapper {
     position:fixed;
-    margin-top: 55px;
+    margin-top: 62px;
     margin-left: -47%;
     float:left;
-    border-bottom-style: solid;
+/*    border-bottom-style: solid;
     border-bottom-width:1px;
-    border-bottom-color:black;
+    border-bottom-color: #6669;*/
     height: 40px;
     display: inline-block;
     width: 100%;
@@ -58,13 +58,13 @@ button {
     font-family: 'Open Sans',sans-serif;
     font-weight: 500;
     font-style: normal;
-    line-height: 40px;
-    z-index: 10;
+    line-height: 1.0;
+    overflow: auto;
 }
 
 .record-message-wrapper {
     position: fixed;
-    margin-top: 90px;
+    margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
     background-color:white;
