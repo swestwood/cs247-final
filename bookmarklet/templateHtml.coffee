@@ -24,17 +24,24 @@ window.buildTemplates = =>
 
   <div class="lower-section">
 
-  <div class="tab-button-area">
-    <button onclick="$('.messages-area-wrapper').show(); $('.group-feed-wrapper').hide(); ">See Messages</button>
-    <button onclick="$('.messages-area-wrapper').hide(); $('.group-feed-wrapper').show();" >See Group Activity</button>
-  </div>
+    <div class="tab-button-area">
+      <button class="message-show-button active-content-btn">See Messages</button>
+      <button class="feed-show-button" >See Group Activity</button>
+    </div>
+
     <div class="lower-section-content">
       <div class="messages-area-wrapper">
           <div class="messages-area">
-              <div class="messages-area-title">Messages</div>
+            {{!-- {{ <div class="messages-area-title">Messages</div>}} --}}
               <div class="message-container-outer">
                 <div class="message-container-inner">
-                  <div id="messages-container"></div>
+                  <div id="messages-container">
+
+                    <div class="loading-spinner-wrapper">
+                      <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
+                      <div class="waiting-intertubes"> Waiting on the intertubes...</div>
+                    </div>
+                  </div>
                 </div>
               </div>
           </div>
@@ -43,8 +50,14 @@ window.buildTemplates = =>
 
       <div class="group-feed-wrapper" style="display:none">
           <div class="group-feed-area">
-              <div class="group-feed-area-title">Group Activity</div>
-              <div class="group-feed-container"></div>
+            {{!-- {{               <div class="group-feed-area-title">Group Activity</div>}} --}}
+              <div class="group-feed-container">
+
+                <div class="loading-spinner-wrapper">
+                  <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
+                  <div class="waiting-intertubes"> Waiting on the intertubes...</div>
+                </div>
+              </div>
           </div>
       </div>
 

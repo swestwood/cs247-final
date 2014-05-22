@@ -80,6 +80,7 @@
     };
 
     App.prototype.showSidenote = function() {
+      var _this = this;
       $(".sidenote-app-content").html(Templates["sidenoteAppContent"]());
       this.showGroupAndUserName();
       this.fbInteractor = new FirebaseInteractor(this.groupName, this.rawUrl);
@@ -89,7 +90,19 @@
       this.messageList = new MessageList($('.messages-area-wrapper'), this.fbInteractor, this.timestampUpdater);
       this.groupFeed = new GroupFeed($('.group-feed-wrapper'), this.fbInteractor, this.timestampUpdater);
       $('.set-group-user-wrapper').hide();
-      return $(".sidenote-app-content").show();
+      $(".sidenote-app-content").show();
+      $(".message-show-button").on("click", function() {
+        $('.messages-area-wrapper').show();
+        $('.group-feed-wrapper').hide();
+        $(".message-show-button").addClass("active-content-btn");
+        return $(".feed-show-button").removeClass("active-content-btn");
+      });
+      return $(".feed-show-button").on("click", function() {
+        $('.messages-area-wrapper').hide();
+        $('.group-feed-wrapper').show();
+        $(".message-show-button").removeClass("active-content-btn");
+        return $(".feed-show-button").addClass("active-content-btn");
+      });
     };
 
     return App;
@@ -113,6 +126,9 @@
 
     GroupFeed.prototype.addFeedElem = function(data) {
       var context, feedTimestampClass, titleLen, titleToDisplay;
+      if (this.elem.find(".loading-spinner")) {
+        $(this.elem.find(".loading-spinner-wrapper")).hide();
+      }
       feedTimestampClass = "feedtime-" + Math.floor(Math.random() * 100000000);
       titleToDisplay = data.rawUrl;
       if (data.documentTitle) {
@@ -167,6 +183,9 @@
 
     MessageList.prototype.addMessage = function(data) {
       var messageTimestampClass, time, videoContext, videoElemClass, videoWrapperClass, wrapperContext;
+      if (this.elem.find(".loading-spinner")) {
+        $(this.elem.find(".loading-spinner-wrapper")).hide();
+      }
       messageTimestampClass = "messagetime-" + Math.floor(Math.random() * 100000000);
       videoElemClass = "videoelem-" + Math.floor(Math.random() * 100000000);
       videoWrapperClass = "videowrapper-" + Math.floor(Math.random() * 100000000);

@@ -83,16 +83,28 @@ button {
 }
 .lower-section-content {
     margin-top: 15px;
-    background : linear-gradient(white,#f1f1f1);
-    border : dotted 1px #4472B9;
+    /*background : linear-gradient(white,#f1f1f1);*/
+    /*border : dotted 1px #4472B9;*/
+    border: solid 1px lightblue;
+    background-color: rgb(220, 246, 255);
     overflow : auto;
-    height : 240px;
+    height : 260px;
 
 }
 .tab-button-area button {
     line-height: 1.0;
 }
+.tab-button-area button.active-content-btn {
+    background-color: rgb(173, 228, 246);
+    border-color: rgb(173, 228, 246) !important;
+}
 
+.loading-spinner-wrapper {
+    color: rgb(82, 147, 168);
+}
+.loading-spinner {
+    padding: 44px;
+}
 #sidenote-content {
     background: white; /*linear-gradient(#bdedff, white);*/
     border: none;
@@ -212,7 +224,7 @@ button {
 }
 .message-feed-elem {
     text-align: left;
-    margin-top: 20px;
+    margin-top: 9px;
 }
 
 .vid-message-wrapper {
