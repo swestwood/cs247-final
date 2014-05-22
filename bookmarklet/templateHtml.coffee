@@ -8,13 +8,13 @@ window.buildTemplates = =>
 
   <div class="sidenote-metadata-wrapper">
       <div class="user-name-wrapper">
-          Hey there <span class="user-name">(unknown)</span>,
+          <span class="user-name">(unknown)</span>,
       </div>
       <div class="group-name-wrapper">
-          you're in the group <span class="group-name">(none)</span>.
+          you're in <span class="group-name">(none)</span>.
       </div>
       <div class="metadata-problem-instructions">
-      <span class="change-user-group">change name or group</span>
+      <span class="change-user-group">change</span>
       </div>
   </div>
   
@@ -22,19 +22,27 @@ window.buildTemplates = =>
   <div class="record-message-wrapper">
   </div>
 
+  <div class="lower-section">
+
   <div class="messages-area-wrapper">
       <div class="messages-area">
           <div class="messages-area-title">Messages</div>
-          <div id="messages-container"></div>
+          <div class="message-container-outer">
+            <div class="message-container-inner">
+              <div id="messages-container"></div>
+            </div>
+          </div>
       </div>
   </div>
 
 
   <div class="group-feed-wrapper">
       <div class="group-feed-area">
-          <div class="group-feed-area-title">Recent group activity</div>
+          <div class="group-feed-area-title">Group Activity</div>
           <div class="group-feed-container"></div>
       </div>
+  </div>
+
   </div>
   """
 
