@@ -10,7 +10,7 @@ app_jquery_loading_script.src = "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jq
 app_jquery_loading_script.onload = function() {
 
     var frame = $("<iframe id='ssidenote-iframe'/>");
-    frame.attr("src", "//sidenote.herokuapp.com/bookmarklet/app.html?pageTitle=" + pageTitleToSendToSidenoteFrame);
+    frame.attr("src", "//sidenote.herokuapp.com/bookmarklet/app.html");
     // frame.attr("src", "//localhost:5000/bookmarklet/app.html");
 
     var frameWidth = "400px";
