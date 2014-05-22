@@ -1,23 +1,97 @@
 body {
     text-align: center;
     /*font-family: Open Sans;*/
+    font-family: 'Open Sans';
 }
 p {
     margin-top: 20px;
+    font-family: 'Open Sans';
+    /*font-family: 'Raleway';*/
 }
 h1 {
-    font-weight: bold;
     margin-top: -10px;
-    font-family: 'Shadows Into Light', sans-serif;
+    font-weight: 100;
+    /*font-family: 'Shadows Into Light', sans-serif;*/
     font-size: 60px;
 }
 
+button {
+    display: inline-block;
+    outline: 0px none;
+    color: #FFF;
+    background: none repeat scroll 0% 0% #4472B9;
+    white-space: nowrap;
+    border: 5px solid #4472B9 !important;
+    font-family: 'Raleway',sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    padding: 9px 16px !important;
+    line-height: 1.4;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease 0s;
+}
+
+#sidenote-header {
+    position:fixed;
+    margin-top: 0px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100px;
+}
+
+.sidenote-metadata-wrapper {
+    position:fixed;
+    margin-top: 55px;
+    margin-left: -47%;
+    float:left;
+    border-bottom-style: solid;
+    border-bottom-width:1px;
+    border-bottom-color:black;
+    height: 40px;
+    display: inline-block;
+    width: 100%;
+    font-size: 15px;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 40px;
+    z-index: 10;
+}
+
+.record-message-wrapper {
+    position:fixed;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:white;
+    width: 100%;
+    z-index: 99;
+}
+
+.lower-section {
+    position: fixed;
+    border : solid 2px #4472B9;
+    background : linear-gradient(white,#f1f1f1); 
+    color :black; 
+    margin-top: 210px;
+    margin-left: 40px;
+    padding-top: 10px;
+    margin-bottom: -50px;
+    width : 80%;
+    height : 440px; 
+    overflow : auto;
+}
+
 #sidenote-content {
-    background: linear-gradient(#bdedff, white);
+    background: white; /*linear-gradient(#bdedff, white);*/
     border: none;
     top: 0;
     right: 0;
-    left: 0;
+    margin-left: -20px;
     z-index: 10;
     animation-duration: .8s;
     -webkit-animation-duration: .8s;
@@ -25,6 +99,8 @@ h1 {
 }
 .metadata-problem-instructions {
     font-size: 70%;
+    float: right;
+    margin-right: 10%;
 }
 .group-name-wrapper, .user-name-wrapper {
     display: inline-block;
@@ -33,8 +109,61 @@ h1 {
     font-weight: 600;
 }
 .messages-area-title {
-    font-size: 120%;
+    font-size: 200%;
 }
+
+.group-feed-area-title {
+    margin-top: 40px;
+    font-size: 200%;
+}
+
+.group-feed-area {
+    margin-left: 10px;
+}
+
+#messages-container {
+    display: inline;
+    /*float:left;
+    display:inline;
+    overflow:auto;
+    white-space: nowrap;
+    width:1000px;
+    height:210px;
+    border: 13px solid #bedeaa;
+    overflow-x: scroll;
+    /*overflow-y: hidden;  */
+}
+
+.messages-container-outer {
+    /*float:left;
+    display:inline;
+    width:500px;
+    height:300px;
+    overflow:auto;
+    white-space: nowrap;
+    width:530px;
+    height:210px;
+    border: 13px solid #bed5cd;
+    overflow-x: scroll;
+    /*overflow-y: hidden;  */  
+}
+
+.messages-container-inner {
+    /*width: 10000px;
+    display:inline;*/
+    width: 320px; /* arbitary for demo only */
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.wrapper {
+    width: 320px; /* arbitary for demo only */
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
 .recording-error-message, .record-overtime-error-message, .input-info-error {
     color: red;
 }
@@ -45,7 +174,10 @@ h1 {
 .change-user-group {
     cursor: pointer;
     font-weight: 200;
-    color: #26c6ff;
+    color: #4472B9;
+}
+.done-inputting-info{
+    margin-bottom:20px;
 }
 .allow {
     margin-top: 20px;
