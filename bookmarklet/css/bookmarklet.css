@@ -26,7 +26,7 @@ button {
     font-weight: 500;
     font-style: normal;
     padding: 9px 16px !important;
-    line-height: 1.4;
+    line-height: 1.0;
     position: relative;
     border-radius: 10px;
     box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.15);
@@ -74,16 +74,23 @@ button {
 
 .lower-section {
     position: fixed;
-    border : solid 2px #4472B9;
-    background : linear-gradient(white,#f1f1f1); 
     color :black; 
-    margin-top: 210px;
-    margin-left: 40px;
+    margin-top: 315px; /*210px;*/
+    margin-left: 10px;
     padding-top: 10px;
-    margin-bottom: -50px;
-    width : 80%;
-    height : 440px; 
+    /*margin-bottom: -50px;*/
+    width : 95%;
+}
+.lower-section-content {
+    margin-top: 15px;
+    background : linear-gradient(white,#f1f1f1);
+    border : dotted 1px #4472B9;
     overflow : auto;
+    height : 240px;
+
+}
+.tab-button-area button {
+    line-height: 1.0;
 }
 
 #sidenote-content {
@@ -113,7 +120,7 @@ button {
 }
 
 .group-feed-area-title {
-    margin-top: 40px;
+    /*margin-top: 40px;*/
     font-size: 200%;
 }
 
@@ -208,6 +215,23 @@ button {
     margin-top: 20px;
 }
 
+.vid-message-wrapper {
+    padding-top: 12px;
+}
+.vid-message-user {
+    display: inline-block;
+    color: steelblue;
+}
+.vid-message-timestamp {
+    display: inline-block;
+    color: #AAA;
+    font-size: .9em;
+}
+.feed-timestamp {
+    color: #AAA;
+    font-size: .8em;
+}
+
 .waiting-message {
     margin: 20px;
 }
@@ -217,8 +241,9 @@ button {
     height: auto;
 }
 .record-button {
-    margin-top: 30px;
+    margin-top: 100px; /* TODO hacky -- to get it to vertically align middle. 30px;*/
     margin-bottom: 30px;
+
 }
 
 #video-container {

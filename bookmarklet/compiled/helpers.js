@@ -65,8 +65,8 @@
       this.connectWebcam = __bind(this.connectWebcam, this);
       this.curVideoBlob = null;
       this.webcamConnected = false;
-      this.videoWidth = 270;
-      this.videoHeight = 200;
+      this.videoWidth = 202;
+      this.videoHeight = 150;
     }
 
     VideoRecorder.prototype.connectWebcam = function(successCallback, failureCallback) {
