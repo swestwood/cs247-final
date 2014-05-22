@@ -38,6 +38,16 @@ window.buildTemplates = =>
   </div>
   """
 
+  videoMessageElem = """
+  <div class="vid-message-wrapper">
+    <div class="vid-message-info">
+      <div class="vid-message-user">{{videoUser}}</div>
+      <div class="vid-message-timestamp {{messageTimestampClass}}">{{time}}</div>
+    </div>
+    <div class="vid_wrapper"><video controls="true" width=250><source src="{{videoUrl}}" type="video/webm"></video></div>
+  </div>
+  """
+
   setGroupAndUserArea = """
   <div class="set-group-and-user">
     <div><input type="text" class="user-name-input" placeholder="Name"></div>
@@ -98,6 +108,7 @@ window.buildTemplates = =>
     "recordMessageArea": recordMessageArea
     "recordMessageControls": recordMessageControls
     "messageFeedElem": messageFeedElem
+    "videoMessageElem": videoMessageElem
   return handlebarsElems
 
 # Access templates via window.Templates["quiz"] for example, depending on the name given in

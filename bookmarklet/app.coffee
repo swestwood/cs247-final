@@ -114,14 +114,16 @@ class window.MessageList
 
   addMessage: (data) =>
     messageTimestampClass = "messagetime-"+Math.floor(Math.random()*100000000)
-    # TODO this should really be a handlebars template
-    [source, video] = VideoDisplay.createVideoElem(data.videoBlob)
-    video.appendChild(source)
-    $("#messages-container").prepend(video)
     time = if data.timestampMS then @timestampUpdater.timestampToOutputString(data.timestampMS) else "unknown time";
-    @messageList.prepend("<h4>" + data.user  + "</h4> <div class='" + messageTimestampClass + "'>" + time + "</div>")
+    context =
+      videoUrl: URL.createObjectURL(BlobConverter.base64_to_blob(data.videoBlob))
+      messageTimestampClass: messageTimestampClass
+      time: time
+      videoUser: data.user
+    $("#messages-container").prepend(Templates["videoMessageElem"](context))
+    # TODO MANUAL PLAY and PAUSE, reload when finishes playing http://www.w3schools.com/html/tryit.asp?filename=tryhtml5_video_js_prop
+    # http://stackoverflow.com/questions/2741493/how-do-you-detect-html5-video-events
     @timestampUpdater.addToUpdateMap(messageTimestampClass, data.timestampMS)
-
 
 class window.MessageRecorder
 

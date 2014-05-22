@@ -51,23 +51,9 @@
   window.VideoDisplay = (function() {
     function VideoDisplay() {}
 
-    VideoDisplay.createVideoElem = function(video_data) {
-      var source, video;
-      video = document.createElement("video");
-      video.autoplay = false;
-      video.controls = true;
-      video.loop = false;
-      video.width = 250;
-      video.muted = false;
-      source = document.createElement("source");
-      source.src = URL.createObjectURL(BlobConverter.base64_to_blob(video_data));
-      source.type = "video/webm";
-      return [source, video];
-    };
-
     return VideoDisplay;
 
-  }).call(this);
+  })();
 
   window.VideoRecorder = (function() {
     "Handles the mechanics of recording videos every 3 seconds.";

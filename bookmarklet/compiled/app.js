@@ -150,13 +150,16 @@
     }
 
     MessageList.prototype.addMessage = function(data) {
-      var messageTimestampClass, source, time, video, _ref;
+      var context, messageTimestampClass, time;
       messageTimestampClass = "messagetime-" + Math.floor(Math.random() * 100000000);
-      _ref = VideoDisplay.createVideoElem(data.videoBlob), source = _ref[0], video = _ref[1];
-      video.appendChild(source);
-      $("#messages-container").prepend(video);
       time = data.timestampMS ? this.timestampUpdater.timestampToOutputString(data.timestampMS) : "unknown time";
-      this.messageList.prepend("<h4>" + data.user + "</h4> <div class='" + messageTimestampClass + "'>" + time + "</div>");
+      context = {
+        videoUrl: URL.createObjectURL(BlobConverter.base64_to_blob(data.videoBlob)),
+        messageTimestampClass: messageTimestampClass,
+        time: time,
+        videoUser: data.user
+      };
+      $("#messages-container").prepend(Templates["videoMessageElem"](context));
       return this.timestampUpdater.addToUpdateMap(messageTimestampClass, data.timestampMS);
     };
 

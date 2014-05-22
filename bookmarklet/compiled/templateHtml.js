@@ -5,8 +5,9 @@
     _this = this;
 
   window.buildTemplates = function() {
-    var handlebarsElems, messageFeedElem, recordMessageArea, recordMessageControls, setGroupAndUserArea, sidenoteAppContent;
+    var handlebarsElems, messageFeedElem, recordMessageArea, recordMessageControls, setGroupAndUserArea, sidenoteAppContent, videoMessageElem;
     sidenoteAppContent = "\n<div class=\"sidenote-metadata-wrapper\">\n    <div class=\"user-name-wrapper\">\n        Hey there <span class=\"user-name\">(unknown)</span>,\n    </div>\n    <div class=\"group-name-wrapper\">\n        you're in the group <span class=\"group-name\">(none)</span>.\n    </div>\n    <div class=\"metadata-problem-instructions\">\n    <span class=\"change-user-group\">change name or group</span>\n    </div>\n</div>\n\n\n<div class=\"record-message-wrapper\">\n</div>\n\n<div class=\"messages-area-wrapper\">\n    <div class=\"messages-area\">\n        <div class=\"messages-area-title\">Messages</div>\n        <div id=\"messages-container\"></div>\n    </div>\n</div>\n\n\n<div class=\"group-feed-wrapper\">\n    <div class=\"group-feed-area\">\n        <div class=\"group-feed-area-title\">Recent group activity</div>\n        <div class=\"group-feed-container\"></div>\n    </div>\n</div>";
+    videoMessageElem = "<div class=\"vid-message-wrapper\">\n  <div class=\"vid-message-info\">\n    <div class=\"vid-message-user\">{{videoUser}}</div>\n    <div class=\"vid-message-timestamp {{messageTimestampClass}}\">{{time}}</div>\n  </div>\n  <div class=\"vid_wrapper\"><video controls=\"true\" width=250><source src=\"{{videoUrl}}\" type=\"video/webm\"></video></div>\n</div>";
     setGroupAndUserArea = "<div class=\"set-group-and-user\">\n  <div><input type=\"text\" class=\"user-name-input\" placeholder=\"Name\"></div>\n  <div><input type=\"text\" class=\"group-name-input\" placeholder=\"Group\"></div>\n  <p>You'll share video messages within your group.</p>\n  <p>Try the group name <strong>CS247</strong>.</p>\n  <button class=\"done-inputting-info\">Done</button>\n  <div class=\"input-info-error\"> </div>\n</div\n\n";
     messageFeedElem = "<div class=\"message-feed-elem\">\n  <div class=\"feed-timestamp {{feedtimeClass}}\">{{time}}</div>\n  {{user}} posted on <a href=\"{{rawUrl}}\" target=\"_blank\">{{documentTitle}}</a>\n</div>";
     recordMessageArea = "<div class=\"record-message-area\">\n    <div class=\"record-message-container\">\n        <button class=\"record-button\">Record a message</button>\n        <div class=\"webcam_stream_container\">\n          <div id=\"webcam_stream\">\n              <div id=\"sample-user-container\">\n                <div id=\"sharing-video-help\" style=\"display:none\">\n                    <p>Click \"Share Selected Devices\" to use our video chat.</p>\n                    <div class=\"sample-user place-user\">\n                        <img class=\"allow\" src=\"../bookmarklet/library/allow-me.png\" alt=\"allow me\" width=\"300\" \>\n                    </div>\n                </div>\n              </div>\n          </div>\n        </div>\n        <div class=\"record-controls-wrapper\"></div>\n    </div>\n</div>";
@@ -16,7 +17,8 @@
       "setGroupAndUserArea": setGroupAndUserArea,
       "recordMessageArea": recordMessageArea,
       "recordMessageControls": recordMessageControls,
-      "messageFeedElem": messageFeedElem
+      "messageFeedElem": messageFeedElem,
+      "videoMessageElem": videoMessageElem
     };
     return handlebarsElems;
   };
