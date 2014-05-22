@@ -42,24 +42,27 @@ window.getStringWithoutTrailing = (origString, toRemove) =>
 
 class window.VideoDisplay
 
-  @createVideoElem: (video_data) =>
-    # for gif instead, use this code below and change mediaRecorder.mimeType in onMediaSuccess below
-    # var video = document.createElement("img")
-    # video.src = URL.createObjectURL(BlobConverter.base64_to_blob(data.v))
+  # @createVideoElem: (video_data) =>
+  #   # for gif instead, use this code below and change mediaRecorder.mimeType in onMediaSuccess below
+  #   # var video = document.createElement("img")
+  #   # video.src = URL.createObjectURL(BlobConverter.base64_to_blob(data.v))
+
+  #   context =
+  #     videoUrl = URL.createObjectURL(BlobConverter.base64_to_blob(video_data))
+
 
     # for video element
-    video = document.createElement("video")
-    video.autoplay = false
-    video.controls = true # optional
-    video.loop = false
-    video.width = 250
-    video.muted = false
+    # video = document.createElement("video")
+    # video.autoplay = false
+    # video.controls = true # optional
+    # video.loop = false
+    # video.width = 250
+    # video.muted = false
 
-    source = document.createElement("source")
+    # source = document.createElement("source")
     # source.src =  URL.createObjectURL(video_data)
-    source.src =  URL.createObjectURL(BlobConverter.base64_to_blob(video_data))
-    source.type =  "video/webm"
-    return [source, video]
+    # source.type =  "video/webm"
+    # return [source, video]
 
 class window.VideoRecorder
 
