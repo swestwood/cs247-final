@@ -36,10 +36,9 @@ window.buildTemplates = =>
               <div class="message-container-outer">
                 <div class="message-container-inner">
                   <div id="messages-container">
-
                     <div class="loading-spinner-wrapper">
                       <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
-                      <div class="waiting-intertubes"> Waiting on the intertubes...</div>
+                      <div class="waiting-intertubes">Waiting on the intertubes, <br /> or for the first message to be posted...</div>
                     </div>
                   </div>
                 </div>
@@ -52,10 +51,9 @@ window.buildTemplates = =>
           <div class="group-feed-area">
             {{!-- {{               <div class="group-feed-area-title">Group Activity</div>}} --}}
               <div class="group-feed-container">
-
                 <div class="loading-spinner-wrapper">
                   <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
-                  <div class="waiting-intertubes"> Waiting on the intertubes...</div>
+                  <div class="waiting-intertubes">Waiting on the intertubes, <br /> or for the first message to be posted...</div>
                 </div>
               </div>
           </div>
