@@ -11,118 +11,185 @@
 <link rel="stylesheet" type="text/css" href="../dashboard/dashboard.css">
 <script src="/dashboard/compiled/index.js"></script>
 <link rel="icon" href="../dashboard/library/favicon.ico" type="image/x-icon"/>
+<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
 </head>
 
 <body>
-<div class="container">
+<div class="whole-page">
 
-    <div class="sidebar">
-        <div class="sidebar-inner">
-            <h2 id="sidebar-title">What is SideNote?</h2>
-            <p id="sidebar-tagline">Comment on the side of any page!</p>
+    <div class="left-side">
+        <div class="inside-left">
+            <div id="left-header">
+                <h1>What is SideNote?</h1>
+                <h3>Want to share your reactions while browsing? Click your SideNote bookmark.</h3>
+            </div>
             <div id="left-screenshot">
-                <img class="screenshot" src='../dashboard/library/sn1.png' alt='screenshot'/>
+                <img id="sidebar-image" src='../dashboard/library/sn1.png' alt='screenshot'/>
                 <p id="sidebar-text">Just enter your name and group name.</p>
             </div>
             <div id="left-screenshot">
-                <img class="screenshot" src='../dashboard/library/sn4.png' alt='screenshot'/>
+                <img id="sidebar-image" src='../dashboard/library/sn4.png' alt='screenshot'/>
                 <p id="sidebar-text">Record and post a video.</p>
             </div>
             <div id="left-screenshot">
-                <img class="screenshot" src='../dashboard/library/sn5.png' alt='screenshot'/>
+                <img id="sidebar-image" src='../dashboard/library/sn5.png' alt='screenshot'/>
                 <p id="sidebar-text">View your group's videos.</p>
             </div>
         </div>
     </div>
 
+    <div class="right-side">
+        <div id="drag-button">
+            <a class="bookmarklet-link" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='//sidenote.herokuapp.com/bookmarklet/bookmarklet.js';})();" onclick="return false">
+            <img id="sn-button" src="../dashboard/library/bookmark-button.png" alt="Click for SideNote" width="230"></a>
+            <img src="../dashboard/library/arrow.png" alt="arrow to bookmark bar" width="100" height="100">
+        </div>
+        <div id="instructions">
+            <div class="instruction-line">
+                <img id="number-circle" src="../dashboard/library/1.png" alt="1" width="60">
+                <h2 id="instr-words">Drag SideNote to the bookmarks bar.</h2>
+            </div>
+            <div class="instruction-line">
+                <img id="number-circle" src="../dashboard/library/2.png" alt="2" width="60"></a>
+                <h2 id="instr-words">Go to any webpage, <strong>then click SideNote.</strong></h2>
+            </div>
+        </div>
+        <div class="suggestions">
+            <a href="http://en.wikipedia.org/wiki/Special:Random">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/wikipedia.png' alt='wikipedia'/>
+                    <figcaption>Wikipedia</figcaption>
+                </figure>
+            </a>
+
+            <a href="http://nytimes.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/nytimes.png' alt='nytimes'/>
+                    <figcaption>New York Times</figcaption>
+                </figure>
+            </a>
+
+            <a href="http://www.theonion.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/theonion.png' alt='the onion'/>
+                    <figcaption>The Onion</figcaption>
+                </figure>
+            </a>
+
+            <a href="http://www.gifbin.com/random">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/gifbin.png' alt='random gifs'/>
+                    <figcaption>Random Gifs</figcaption>
+                </figure>
+            </a>
+
+            <a href="http://online.wsj.com/home-page">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/wsj.png' alt='wall street journal'/>
+                    <figcaption>Wall Street Journal</figcaption>
+                </figure>
+            </a>
+
+            <a href="http://www.foxnews.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/fox.png' alt='fox news'/>
+                    <figcaption>Fox News</figcaption>
+                </figure>
+            </a>
+
+            <a href="http://imgur.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/imgur.png' alt='imgur'/>
+                    <figcaption>Viral Images</figcaption>
+                </figure>
+            </a>
+
+            <a href="http://www.reddit.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/reddit.png' alt='reddit'/>
+                    <figcaption>Reddit</figcaption>
+                </figure>
+            </a>
+        </div>
+    </div>
+
     <div class="main-content">
-    <div class="row steps">
-        <div class="col-md-12">
             <div class="drag-me-link">
                     <!-- <a class="bookmarklet-link" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='//localhost:5000/bookmarklet/bookmarklet.js';})();" onclick="return false"><img src="../dashboard/library/bookmark-button.png" alt="CLICK ME - SideNote, for on-page video chat" width="230"></a> -->
-                    <!-- TODO change to Heroku when deploying - will work for HTTPS as well then. -->
+                    <!-- TODO change to Heroku when deploying - will work for HTTPS as well then. --
                     <a class="bookmarklet-link" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='//sidenote.herokuapp.com/bookmarklet/bookmarklet.js';})();" onclick="return false"><img src="../dashboard/library/bookmark-button.png" alt="Click for SideNote" width="230"></a>
                 <img src="../dashboard/library/arrow.png" alt="arrow to bookmark bar" width="100" height="100">
-                </h3>
             </div>
+    <div class="starting-instructions">
+        <div class="instruction-line">
+            <img class="number-circle" src="../dashboard/library/1.png" alt="1" width="60">
+            <h2>Drag SideNote to the bookmarks bar.</h2>
         </div>
-    </div>
-
-    <div class="row steps">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="starting-instructions">
-                        <img class="number-circle" src="../dashboard/library/1.png" alt="1" width="60">
-                        <h2>Drag SideNote to the bookmarks bar.</h2>
-                        <h2> </h2>
-                        <img class="number-circle" src="../dashboard/library/2.png" alt="2" width="60"></a>
-                        <h2>Go to any webpage, <strong>then click SideNote.</strong></h2>
-                    </div>
-                </div>
-            </div>
+        <div class="instruction-line">
+            <img class="number-circle" src="../dashboard/library/2.png" alt="2" width="60"></a>
+            <h2>Go to any webpage, <strong>then click SideNote.</strong></h2>
         </div>
-    </div>
 
-    <div class="suggestions">
-        <a href="http://en.wikipedia.org/wiki/Special:Random">
-            <figure>
-                <img class="site-preview-thumb" src='../dashboard/library/wikipedia.png' alt='wikipedia'/>
-                <figcaption>Wikipedia</figcaption>
-            </figure>
-        </a>
+        <div class="suggestions">
+            <a href="http://en.wikipedia.org/wiki/Special:Random">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/wikipedia.png' alt='wikipedia'/>
+                    <figcaption>Wikipedia</figcaption>
+                </figure>
+            </a>
 
-        <a href="http://nytimes.com/">
-            <figure>
-                <img class="site-preview-thumb" src='../dashboard/library/nytimes.png' alt='nytimes'/>
-                <figcaption>New York Times</figcaption>
-            </figure>
-        </a>
+            <a href="http://nytimes.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/nytimes.png' alt='nytimes'/>
+                    <figcaption>New York Times</figcaption>
+                </figure>
+            </a>
 
-        <a href="http://www.theonion.com/">
-            <figure>
-                <img class="site-preview-thumb" src='../dashboard/library/theonion.png' alt='the onion'/>
-                <figcaption>The Onion</figcaption>
-            </figure>
-        </a>
+            <a href="http://www.theonion.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/theonion.png' alt='the onion'/>
+                    <figcaption>The Onion</figcaption>
+                </figure>
+            </a>
 
-        <a href="http://www.gifbin.com/random">
-            <figure>
-                <img class="site-preview-thumb" src='../dashboard/library/gifbin.png' alt='random gifs'/>
-                <figcaption>Random Gifs</figcaption>
-            </figure>
-        </a>
+            <a href="http://www.gifbin.com/random">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/gifbin.png' alt='random gifs'/>
+                    <figcaption>Random Gifs</figcaption>
+                </figure>
+            </a>
 
-        <a href="http://online.wsj.com/home-page">
-            <figure>
-                <img class="site-preview-thumb" src='../dashboard/library/wsj.png' alt='wall street journal'/>
-                <figcaption>Wall Street Journal</figcaption>
-            </figure>
-        </a>
+            <a href="http://online.wsj.com/home-page">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/wsj.png' alt='wall street journal'/>
+                    <figcaption>Wall Street Journal</figcaption>
+                </figure>
+            </a>
 
-        <a href="http://www.foxnews.com/">
-            <figure>
-                <img class="site-preview-thumb" src='../dashboard/library/fox.png' alt='fox news'/>
-                <figcaption>Fox News</figcaption>
-            </figure>
-        </a>
+            <a href="http://www.foxnews.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/fox.png' alt='fox news'/>
+                    <figcaption>Fox News</figcaption>
+                </figure>
+            </a>
 
-        <a href="http://imgur.com/">
-            <figure>
-                <img class="site-preview-thumb" src='../dashboard/library/imgur.png' alt='imgur'/>
-                <figcaption>Viral Images</figcaption>
-            </figure>
-        </a>
+            <a href="http://imgur.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/imgur.png' alt='imgur'/>
+                    <figcaption>Viral Images</figcaption>
+                </figure>
+            </a>
 
-        <a href="http://www.reddit.com/">
-            <figure>
-                <img class="site-preview-thumb" src='../dashboard/library/reddit.png' alt='reddit'/>
-                <figcaption>Reddit</figcaption>
-            </figure>
-        </a>
-    </div>
-    </div>
+            <a href="http://www.reddit.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/reddit.png' alt='reddit'/>
+                    <figcaption>Reddit</figcaption>
+                </figure>
+            </a>
+        </div>
+
+    </div>-->
 
 
 <!--

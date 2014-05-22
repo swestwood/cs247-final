@@ -1,21 +1,19 @@
-.header {
-    height: 220px;
-    background-attachment:fixed;
-    position: relative;
+/* GENERAL STYLE */
+h1 {
+    font-family: 'Raleway';
+    font-size: 30px;
 }
-
 h2 {
+    font-family: 'Raleway';
     font-size: 20px;
-    margin-top: 60px;
-    margin-bottom: 40px;
 }
-
-img {
-    float:left;
+h3 {
+    font-family: 'Raleway';
+    font-size: 14px;
 }
-
-a, figure {
-    display: inline-block;
+p {
+    font-family: 'Raleway';
+    font-size: 10pt;
 }
 figcaption {
     margin: 10px 0 0 0;
@@ -25,142 +23,88 @@ figcaption {
 }
 figure {
     padding: 5px;
+    display: inline-block;
 }
 
-.screenshot {
-    max-width: 200px;
-    border: solid;
-    border-width: 1px;
-    border-color:#26c6ff;
-    box-shadow: 10px 10px 5px #cccccc;
+/* WHOLE PAGE */
+.whole-page {
+    min-height:100%;
+    width:100%;
+    background-image:url("library/sos.png");
+    display:table;
 }
 
-.container {
-    display: table;
-}
+/* SIDEBAR */
+    .left-side {
+        display:table-cell;
+        width: 300px;
+        background-image:url("library/sos.png");
+    }
+
+    .inside-left {
+        width: 300px;
+        margin: 10px;
+        padding-top: -20px;
+        background-color: rgba(255, 255, 255, 0.3);
+        text-align: center;
+    }
+
+    #left-screenshot {
+        border: 2px dotted white;
+        background-color: rgba(255, 255, 255, 0.7);
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+        margin: 20px;
+    }
+
+    #sidebar-text {
+        margin-top: 10px;
+    }
+
+    #sidebar-image {
+        margin-top: 3px;
+        max-width: 200px;
+    }
 
 
-/*active
-condense
-buttons smaller*/
+/* MAINPAGE */
+    .right-side {
+        width: 800px;
+        margin-left: 20px;
+        background-color: rgba(255, 255, 255, 0.3);
+        min-height: 600px;
+        box-shadow: 1px 1px 20px rgba(255, 255, 255, 0.4);
+    }
 
-.sidebar {
-    display: table-cell;
-    width:250px;
-    top:0px;
-    left:20px;
-    bottom:0px;
-    position:absolute;
-    background-color: #e9f9ff;
-    z-index: 10;
-}
+    .instruction-line {
+        float:left;
+        margin-top: 20px;
+    }
+    #instructions {
+        float:left;
+        margin-top: 20px;
+        width:700px;
+    }
+    #number-circle {
+        float:left;
+    }
 
-.sidebar-inner {
-    display: table-cell;
-    width:200px;
-    top:0px;
-    left:20px;
-    bottom:0px;
-    position:absolute;
-    z-index: 10;
-}
+    #sn-button {
+        float:left;
+        margin-top: 80px;
+        margin-left: 80px;
+    }
 
-#left-screenshot {
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-}
+    #instr-words {
+        float:left;
+        margin-left: 10px;
+    }
 
-#sidebar-title {
-    text-align: center;
-    font-size: 40px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 8px;
-}
-
-#sidebar-tagline {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: -20px;
-    font-size: 20px;
-    text-align: center;
-}
-
-#sidebar-text {
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-right: 25px;
-    font-size: 12px;
-    text-align: justify;
-}
-
-.main-content {
-    min-height:500px;
-    width:74%;
-    position:relative;
-    float:right;
-    display: table-cell;
-}
-
-.number-circle {
-    margin-left: -80px;
-    margin-top: -20px;
-}
-
-.bookmarklet {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 10px 40px;
-    height: 100%;
-    width: 500px;
-}
-
-.bookmarklet-link {
-    /*padding: 10px;*/
-    /*background-color: blue;*/
-    /*margin: 0 50px 0px 100px;*/
-    display: block;
-    float:left;
-    float:top;
-    margin-top: 80px;
-    margin-right: 10px;
-    color: purple;
-    font-weight: bold;
-    text-align: center;
-    cursor: url(https://mail.google.com/mail/images/2/openhand.cur), default !important;
-    font-size: 28px;
-}
-
-.bookmarklet-link:hover {
-    text-decoration: none;
-    color: #0057A3;
-}
-
-.drag-me-link {
-    text-align: center;
-    vertical-align: center;
-    font-size: 50px;
-    padding-left: 40%;
-    padding-top: 10px;
-}
-
-.starting-instructions {
-    vertical-align: center;
-    /*text-align: center;*/
-    margin-left: 30%;
-
-}
 
 .suggestions {
     text-align: center;
-    width: 800px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 50px;
+    width: 700px;
+    margin-top:30px;
+    float:left;
 }
 
 .site-preview-thumb:hover {
@@ -179,9 +123,6 @@ buttons smaller*/
 
 .site-preview-thumb {
     width: 150px;
-    border-width: 5px;
-    border-color: cyan;
-    border-style: thick;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 }
 
