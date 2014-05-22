@@ -59,6 +59,7 @@ class App
     @elem.find(".user-name").html(_.escape(@userName))
     @elem.find(".change-user-group").click (evt) =>
       @showSetGroupAndUser()
+
     
   showSidenote: =>
     $(".sidenote-app-content").html(Templates["sidenoteAppContent"]())
@@ -73,6 +74,17 @@ class App
     $('.set-group-user-wrapper').hide()
     $(".sidenote-app-content").show()
 
+    $(".message-show-button").on "click", =>
+      $('.messages-area-wrapper').show()
+      $('.group-feed-wrapper').hide()
+      $(".message-show-button").addClass("active-content-btn")
+      $(".feed-show-button").removeClass("active-content-btn")
+
+    $(".feed-show-button").on "click", =>
+      $('.messages-area-wrapper').hide()
+      $('.group-feed-wrapper').show()
+      $(".message-show-button").removeClass("active-content-btn")
+      $(".feed-show-button").addClass("active-content-btn")
 
 
 class window.GroupFeed
@@ -86,6 +98,7 @@ class window.GroupFeed
 
 
   addFeedElem: (data) =>
+    $(@elem.find(".loading-spinner-wrapper")).hide() if @elem.find(".loading-spinner")
     feedTimestampClass = "feedtime-"+Math.floor(Math.random()*100000000)
     # truncate doc title if needed
     titleToDisplay = data.rawUrl # Take the document title, or the raw URL if one does not exist.
@@ -125,6 +138,7 @@ class window.MessageList
       @rerenderVideo(videoWrapperClass, videoContext)
 
   addMessage: (data) =>
+    $(@elem.find(".loading-spinner-wrapper")).hide() if @elem.find(".loading-spinner")
     # hacky classes to identify elements after rendering them
     messageTimestampClass = "messagetime-"+Math.floor(Math.random()*100000000)
     videoElemClass = "videoelem-"+Math.floor(Math.random()*100000000)
