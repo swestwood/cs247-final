@@ -46,13 +46,23 @@ window.buildTemplates = =>
   </div>
   """
 
+  # Video element sets the width so that the rerender jumping happens vertically, not horizontally, which arguably
+  # looks a bit better.
+  videoElement = """
+  <video class="{{videoElemClass}}" controls="true" width=250><source src="{{videoUrl}}" type="video/webm"></video>
+  """
+
+  # Video message elem guesses at the video height (seems to be working) again to help with the jumping in rerendering.
   videoMessageElem = """
   <div class="vid-message-wrapper">
+    <div class="vid-rerender-wrapper">
     <div class="vid-message-info">
       <div class="vid-message-user">{{videoUser}}</div>
       <div class="vid-message-timestamp {{messageTimestampClass}}">{{time}}</div>
     </div>
-    <div class="vid_wrapper"><video controls="true" width=250><source src="{{videoUrl}}" type="video/webm"></video></div>
+    <div class="vid_wrapper  {{videoWrapperClass}}" style="min-height:205px">
+ 
+    </div>
   </div>
   """
 
@@ -117,6 +127,7 @@ window.buildTemplates = =>
     "recordMessageControls": recordMessageControls
     "messageFeedElem": messageFeedElem
     "videoMessageElem": videoMessageElem
+    "videoElement": videoElement
   return handlebarsElems
 
 # Access templates via window.Templates["quiz"] for example, depending on the name given in

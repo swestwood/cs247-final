@@ -112,17 +112,36 @@ class window.MessageList
       if snapshot and snapshot.val()
         @addMessage(snapshot.val())
 
+  # Rerender the video so it can be replayed, since Firefox fails at allowing video playback
+  # despite the controls
+  rerenderVideo: (videoWrapperClass, videoContext) =>
+    wrapperElem = $("#messages-container ."+videoWrapperClass)
+    return if not wrapperElem
+    wrapperElem.empty()
+    wrapperElem.html(Templates["videoElement"](videoContext))
+    $("video." + videoContext.videoElemClass).one "ended", (evt) =>
+      # Rerender the video so it restarts. (Hack to get around browser lack of video support)
+      console.log "===== Video ended! ========"
+      @rerenderVideo(videoWrapperClass, videoContext)
+
   addMessage: (data) =>
+    # hacky classes to identify elements after rendering them
     messageTimestampClass = "messagetime-"+Math.floor(Math.random()*100000000)
+    videoElemClass = "videoelem-"+Math.floor(Math.random()*100000000)
+    videoWrapperClass = "videowrapper-"+Math.floor(Math.random()*100000000)
     time = if data.timestampMS then @timestampUpdater.timestampToOutputString(data.timestampMS) else "unknown time";
-    context =
-      videoUrl: URL.createObjectURL(BlobConverter.base64_to_blob(data.videoBlob))
+    wrapperContext =
       messageTimestampClass: messageTimestampClass
       time: time
       videoUser: data.user
-    $("#messages-container").prepend(Templates["videoMessageElem"](context))
-    # TODO MANUAL PLAY and PAUSE, reload when finishes playing http://www.w3schools.com/html/tryit.asp?filename=tryhtml5_video_js_prop
-    # http://stackoverflow.com/questions/2741493/how-do-you-detect-html5-video-events
+      videoWrapperClass: videoWrapperClass
+    $("#messages-container").prepend(Templates["videoMessageElem"](wrapperContext))
+
+    videoContext =
+      videoUrl: URL.createObjectURL(BlobConverter.base64_to_blob(data.videoBlob))
+      videoElemClass: videoElemClass
+    
+    @rerenderVideo(videoWrapperClass, videoContext)
     @timestampUpdater.addToUpdateMap(messageTimestampClass, data.timestampMS)
 
 class window.MessageRecorder

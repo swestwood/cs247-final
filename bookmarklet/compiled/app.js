@@ -141,6 +141,7 @@
       this.fbInteractor = fbInteractor;
       this.timestampUpdater = timestampUpdater;
       this.addMessage = __bind(this.addMessage, this);
+      this.rerenderVideo = __bind(this.rerenderVideo, this);
       this.messageList = this.elem.find("#messages-container");
       this.fbInteractor.fb_page_videos.on("child_added", function(snapshot) {
         if (snapshot && snapshot.val()) {
@@ -149,17 +150,39 @@
       });
     }
 
+    MessageList.prototype.rerenderVideo = function(videoWrapperClass, videoContext) {
+      var wrapperElem,
+        _this = this;
+      wrapperElem = $("#messages-container ." + videoWrapperClass);
+      if (!wrapperElem) {
+        return;
+      }
+      wrapperElem.empty();
+      wrapperElem.html(Templates["videoElement"](videoContext));
+      return $("video." + videoContext.videoElemClass).one("ended", function(evt) {
+        console.log("===== Video ended! ========");
+        return _this.rerenderVideo(videoWrapperClass, videoContext);
+      });
+    };
+
     MessageList.prototype.addMessage = function(data) {
-      var context, messageTimestampClass, time;
+      var messageTimestampClass, time, videoContext, videoElemClass, videoWrapperClass, wrapperContext;
       messageTimestampClass = "messagetime-" + Math.floor(Math.random() * 100000000);
+      videoElemClass = "videoelem-" + Math.floor(Math.random() * 100000000);
+      videoWrapperClass = "videowrapper-" + Math.floor(Math.random() * 100000000);
       time = data.timestampMS ? this.timestampUpdater.timestampToOutputString(data.timestampMS) : "unknown time";
-      context = {
-        videoUrl: URL.createObjectURL(BlobConverter.base64_to_blob(data.videoBlob)),
+      wrapperContext = {
         messageTimestampClass: messageTimestampClass,
         time: time,
-        videoUser: data.user
+        videoUser: data.user,
+        videoWrapperClass: videoWrapperClass
       };
-      $("#messages-container").prepend(Templates["videoMessageElem"](context));
+      $("#messages-container").prepend(Templates["videoMessageElem"](wrapperContext));
+      videoContext = {
+        videoUrl: URL.createObjectURL(BlobConverter.base64_to_blob(data.videoBlob)),
+        videoElemClass: videoElemClass
+      };
+      this.rerenderVideo(videoWrapperClass, videoContext);
       return this.timestampUpdater.addToUpdateMap(messageTimestampClass, data.timestampMS);
     };
 
