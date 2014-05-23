@@ -30,7 +30,7 @@ figure {
 .whole-page {
     min-height:100%;
     width:100%;
-    background-image:url("library/sos.png");
+    background-image:url("library/cloth_alike2x.png");
     display:table;
 }
 
@@ -38,7 +38,6 @@ figure {
     .left-side {
         display:table-cell;
         width: 300px;
-        background-image:url("library/sos.png");
     }
 
     .inside-left {

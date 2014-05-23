@@ -16,8 +16,10 @@
 </head>
 
 <body>
+    
 <div class="whole-page">
 
+    <!-- SIDEBAR -->
     <div class="left-side">
         <div class="inside-left">
             <div id="left-header">
@@ -39,12 +41,17 @@
         </div>
     </div>
 
+    <!-- MAIN PAGE -->
     <div class="right-side">
+
+        <!-- BOOKMARKLET BUTTON -->
         <div id="drag-button">
             <a class="bookmarklet-link" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='//sidenote.herokuapp.com/bookmarklet/bookmarklet.js';})();" onclick="return false">
             <img id="sn-button" src="../dashboard/library/bookmark-button.png" alt="Click for SideNote" width="230"></a>
             <img src="../dashboard/library/arrow.png" alt="arrow to bookmark bar" width="100" height="100">
         </div>
+
+        <!-- NUMBERED INSTRUCTIONS -->
         <div id="instructions">
             <div class="instruction-line">
                 <img id="number-circle" src="../dashboard/library/1.png" alt="1" width="60">
@@ -55,6 +62,8 @@
                 <h2 id="instr-words">Go to any webpage, <strong>then click SideNote.</strong></h2>
             </div>
         </div>
+
+        <!-- SUGGESTIONS AT BOTTOM -->
         <div class="suggestions">
 
             <a href="http://www.theonion.com/">
@@ -85,6 +94,13 @@
                 </figure>
             </a>
 
+            <a href="http://imgur.com/">
+                <figure>
+                    <img class="site-preview-thumb" src='../dashboard/library/imgur.png' alt='imgur'/>
+                    <figcaption>Viral Images</figcaption>
+                </figure>
+            </a>
+
             <a href="http://en.wikipedia.org/wiki/Special:Random">
                 <figure>
                     <img class="site-preview-thumb" src='../dashboard/library/wikipedia.png' alt='wikipedia'/>
@@ -96,13 +112,6 @@
                 <figure>
                     <img class="site-preview-thumb" src='../dashboard/library/nytimes.png' alt='nytimes'/>
                     <figcaption>New York Times</figcaption>
-                </figure>
-            </a>
-
-            <a href="http://imgur.com/">
-                <figure>
-                    <img class="site-preview-thumb" src='../dashboard/library/imgur.png' alt='imgur'/>
-                    <figcaption>Viral Images</figcaption>
                 </figure>
             </a>
 
@@ -114,84 +123,6 @@
             </a>
         </div>
     </div>
-
-    <div class="main-content">
-            <div class="drag-me-link">
-                    <!-- <a class="bookmarklet-link" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='//localhost:5000/bookmarklet/bookmarklet.js';})();" onclick="return false"><img src="../dashboard/library/bookmark-button.png" alt="CLICK ME - SideNote, for on-page video chat" width="230"></a> -->
-                    <!-- TODO change to Heroku when deploying - will work for HTTPS as well then. --
-                    <a class="bookmarklet-link" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='//sidenote.herokuapp.com/bookmarklet/bookmarklet.js';})();" onclick="return false"><img src="../dashboard/library/bookmark-button.png" alt="Click for SideNote" width="230"></a>
-                <img src="../dashboard/library/arrow.png" alt="arrow to bookmark bar" width="100" height="100">
-            </div>
-    <div class="starting-instructions">
-        <div class="instruction-line">
-            <img class="number-circle" src="../dashboard/library/1.png" alt="1" width="60">
-            <h2>Drag SideNote to the bookmarks bar.</h2>
-        </div>
-        <div class="instruction-line">
-            <img class="number-circle" src="../dashboard/library/2.png" alt="2" width="60"></a>
-            <h2>Go to any webpage, <strong>then click SideNote.</strong></h2>
-        </div>
-
-        <div class="suggestions">
-            <a href="http://en.wikipedia.org/wiki/Special:Random">
-                <figure>
-                    <img class="site-preview-thumb" src='../dashboard/library/wikipedia.png' alt='wikipedia'/>
-                    <figcaption>Wikipedia</figcaption>
-                </figure>
-            </a>
-
-            <a href="http://nytimes.com/">
-                <figure>
-                    <img class="site-preview-thumb" src='../dashboard/library/nytimes.png' alt='nytimes'/>
-                    <figcaption>New York Times</figcaption>
-                </figure>
-            </a>
-
-            <a href="http://www.theonion.com/">
-                <figure>
-                    <img class="site-preview-thumb" src='../dashboard/library/theonion.png' alt='the onion'/>
-                    <figcaption>The Onion</figcaption>
-                </figure>
-            </a>
-
-            <a href="http://www.gifbin.com/random">
-                <figure>
-                    <img class="site-preview-thumb" src='../dashboard/library/gifbin.png' alt='random gifs'/>
-                    <figcaption>Random Gifs</figcaption>
-                </figure>
-            </a>
-
-            <a href="http://online.wsj.com/home-page">
-                <figure>
-                    <img class="site-preview-thumb" src='../dashboard/library/wsj.png' alt='wall street journal'/>
-                    <figcaption>Wall Street Journal</figcaption>
-                </figure>
-            </a>
-
-            <a href="http://www.foxnews.com/">
-                <figure>
-                    <img class="site-preview-thumb" src='../dashboard/library/fox.png' alt='fox news'/>
-                    <figcaption>Fox News</figcaption>
-                </figure>
-            </a>
-
-            <a href="http://imgur.com/">
-                <figure>
-                    <img class="site-preview-thumb" src='../dashboard/library/imgur.png' alt='imgur'/>
-                    <figcaption>Viral Images</figcaption>
-                </figure>
-            </a>
-
-            <a href="http://www.reddit.com/">
-                <figure>
-                    <img class="site-preview-thumb" src='../dashboard/library/reddit.png' alt='reddit'/>
-                    <figcaption>Reddit</figcaption>
-                </figure>
-            </a>
-        </div>
-
-    </div>-->
-
 
 <!--
 <a href="https://github.com/swestwood/cs247-final"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub"></a>
