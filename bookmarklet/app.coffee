@@ -178,14 +178,17 @@ class window.MessageList
 class window.MessageRecorder
 
   constructor: (@elem, @fbInteractor, @userName, @rawUrl) ->
+    @videoRecorder = new VideoRecorder()
     @setInitialState()
-
 
   setInitialState: =>
     @elem.html(Templates["recordMessageArea"]())
     @recordButton = $(@elem.find(".record-button"))
+    @videoRecorder.resetState()
     @webcam_stream_container = $(@elem.find('.webcam_stream_container'))
-    @videoRecorder = new VideoRecorder()
+    $(".stop-asking-video-button").click (evt) =>
+      $("#sharing-video-help").hide()
+      @recordButton.show()
     @recordButton.click(@respondRecordClick)
 
   """Launches asking permission from the webcam to record a message. Only needs to happen once."""
@@ -195,11 +198,18 @@ class window.MessageRecorder
       $("#sharing-video-help").show()
       @videoRecorder.connectWebcam(@showRecordingControls, @respondRecordingError)
     else
+      # Note: Only asking permission once and rendering then rerendering the video 
+      # works but is super slow. Instead, we just ask for video permission every time, and never 
+      # actually hit this else condition.
       console.log "webcam already connected"
+      @videoRecorder.mediaSuccessCallback(@videoRecorder.videoStream)
+      @showRecordingControls() 
+
 
   showRecordingControls: (videoStream) =>
     $("#sharing-video-help").hide()
-    @recorderControls = new MessageRecorderControls($(@elem.find(".record-controls-wrapper")), @videoRecorder, videoStream, @videoReadyCallback)
+    @recorderControls = new MessageRecorderControls($(@elem.find(".record-controls-wrapper")), @videoRecorder, 
+      videoStream, @videoReadyCallback, @setInitialState)
 
   respondRecordingError: =>
     @webcam_stream_container.html """
@@ -235,9 +245,10 @@ class window.TimestampUpdater
 
 class window.MessageRecorderControls
 
-  constructor: (@elem, @videoRecorder, @videoStream, @videoReadyCallback) ->
+  constructor: (@elem, @videoRecorder, @videoStream, @videoReadyCallback, @resetInitialStateCallback) ->
     @elem.html(Templates['recordMessageControls']())
     @startButton = $(@elem.find(".record-start-button"))
+    @leaveButton = $(@elem.find(".record-leave-button"))
     @stopButton = $(@elem.find(".record-stop-button"))
     @bailButton = $(@elem.find(".record-bail-button"))
     @errorMessage = $(@elem.find(".record-overtime-error-message"))
@@ -247,16 +258,21 @@ class window.MessageRecorderControls
     @startButton.click(@startRecordingMessage)
     @stopButton.click(@stopRecordingMessage)
     @bailButton.click(@bailRecordingMessage)
+    @leaveButton.click(@leaveRecordingMessage)
 
   setButtonsReadyToStart: =>
-    enableButtons([@startButton], [@stopButton, @bailButton])
+    enableButtons([@startButton, @leaveButton], [@stopButton, @bailButton])
+
+  leaveRecordingMessage: =>
+    # Clear out the recording stuff and go back to the 'ask for permission' starting place.
+    @resetInitialStateCallback()
 
   startRecordingMessage: =>
     @recordingState = "started"
     @dataState = "no-data"
     @errorMessage.html("")
     @videoRecorder.startRecordingMedia(@videoStream, @recordingEndedCallback)
-    enableButtons([@stopButton, @bailButton], [@startButton])
+    enableButtons([@stopButton, @bailButton], [@startButton, @leaveButton])
 
   """Called whenever data is available. This can happen # ways:
     1. Because the user presses stop. Then, just reset the buttons and launch the video ready callback.

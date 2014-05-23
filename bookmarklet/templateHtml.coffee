@@ -111,9 +111,13 @@ window.buildTemplates = =>
             <div id="webcam_stream">
                 <div id="sample-user-container">
                   <div id="sharing-video-help" style="display:none">
-                      <p>Click "Share Selected Devices" to use our video chat.</p>
                       <div class="sample-user place-user">
                           <img class="allow" src="../bookmarklet/library/allow-me.png" alt="allow me" width="240" \>
+                      </div>
+                      <div>
+                        <em>Please enable your webcam.
+                        <span class="stop-asking-video-button">(leave?)</span>
+                        </em>
                       </div>
                   </div>
                 </div>
@@ -128,6 +132,7 @@ window.buildTemplates = =>
   recordMessageControls = """
   <div class="record-message-controls-container">
     <button class="record-start-button">Start (max 30 seconds)</button>
+    <button class="record-leave-button">Leave</button>
     <button class="record-stop-button">Done, post!</button>
     <button class="record-bail-button">Oops, discard.</button>
     <span class="record-overtime-error-message"></span>

@@ -63,11 +63,16 @@
       this.startRecordingMedia = __bind(this.startRecordingMedia, this);
       this.mediaSuccessCallback = __bind(this.mediaSuccessCallback, this);
       this.connectWebcam = __bind(this.connectWebcam, this);
-      this.curVideoBlob = null;
-      this.webcamConnected = false;
+      this.resetState = __bind(this.resetState, this);
+      this.resetState();
       this.videoWidth = 202;
       this.videoHeight = 150;
     }
+
+    VideoRecorder.prototype.resetState = function() {
+      this.curVideoBlob = null;
+      return this.webcamConnected = false;
+    };
 
     VideoRecorder.prototype.connectWebcam = function(successCallback, failureCallback) {
       var mediaConstraints, onMediaError, onMediaSuccess,
@@ -77,6 +82,7 @@
         audio: true
       };
       onMediaSuccess = function(videoStream) {
+        _this.videoStream = videoStream;
         _this.webcamConnected = true;
         _this.mediaSuccessCallback(videoStream);
         return successCallback(videoStream);
@@ -90,6 +96,10 @@
 
     VideoRecorder.prototype.mediaSuccessCallback = function(videoStream) {
       var video, webcam_stream;
+      if (!videoStream) {
+        console.error("Bad! Tried to record video with no video stream");
+        return;
+      }
       webcam_stream = document.getElementById('webcam_stream');
       video = document.createElement('video');
       webcam_stream.innerHTML = "";

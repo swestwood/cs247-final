@@ -240,14 +240,20 @@
       this.showRecordingControls = __bind(this.showRecordingControls, this);
       this.respondRecordClick = __bind(this.respondRecordClick, this);
       this.setInitialState = __bind(this.setInitialState, this);
+      this.videoRecorder = new VideoRecorder();
       this.setInitialState();
     }
 
     MessageRecorder.prototype.setInitialState = function() {
+      var _this = this;
       this.elem.html(Templates["recordMessageArea"]());
       this.recordButton = $(this.elem.find(".record-button"));
+      this.videoRecorder.resetState();
       this.webcam_stream_container = $(this.elem.find('.webcam_stream_container'));
-      this.videoRecorder = new VideoRecorder();
+      $(".stop-asking-video-button").click(function(evt) {
+        $("#sharing-video-help").hide();
+        return _this.recordButton.show();
+      });
       return this.recordButton.click(this.respondRecordClick);
     };
 
@@ -259,13 +265,15 @@
         $("#sharing-video-help").show();
         return this.videoRecorder.connectWebcam(this.showRecordingControls, this.respondRecordingError);
       } else {
-        return console.log("webcam already connected");
+        console.log("webcam already connected");
+        this.videoRecorder.mediaSuccessCallback(this.videoRecorder.videoStream);
+        return this.showRecordingControls();
       }
     };
 
     MessageRecorder.prototype.showRecordingControls = function(videoStream) {
       $("#sharing-video-help").hide();
-      return this.recorderControls = new MessageRecorderControls($(this.elem.find(".record-controls-wrapper")), this.videoRecorder, videoStream, this.videoReadyCallback);
+      return this.recorderControls = new MessageRecorderControls($(this.elem.find(".record-controls-wrapper")), this.videoRecorder, videoStream, this.videoReadyCallback, this.setInitialState);
     };
 
     MessageRecorder.prototype.respondRecordingError = function() {
@@ -328,18 +336,21 @@
   })();
 
   window.MessageRecorderControls = (function() {
-    function MessageRecorderControls(elem, videoRecorder, videoStream, videoReadyCallback) {
+    function MessageRecorderControls(elem, videoRecorder, videoStream, videoReadyCallback, resetInitialStateCallback) {
       this.elem = elem;
       this.videoRecorder = videoRecorder;
       this.videoStream = videoStream;
       this.videoReadyCallback = videoReadyCallback;
+      this.resetInitialStateCallback = resetInitialStateCallback;
       this.bailRecordingMessage = __bind(this.bailRecordingMessage, this);
       this.stopRecordingMessage = __bind(this.stopRecordingMessage, this);
       this.recordingEndedCallback = __bind(this.recordingEndedCallback, this);
       this.startRecordingMessage = __bind(this.startRecordingMessage, this);
+      this.leaveRecordingMessage = __bind(this.leaveRecordingMessage, this);
       this.setButtonsReadyToStart = __bind(this.setButtonsReadyToStart, this);
       this.elem.html(Templates['recordMessageControls']());
       this.startButton = $(this.elem.find(".record-start-button"));
+      this.leaveButton = $(this.elem.find(".record-leave-button"));
       this.stopButton = $(this.elem.find(".record-stop-button"));
       this.bailButton = $(this.elem.find(".record-bail-button"));
       this.errorMessage = $(this.elem.find(".record-overtime-error-message"));
@@ -347,10 +358,15 @@
       this.startButton.click(this.startRecordingMessage);
       this.stopButton.click(this.stopRecordingMessage);
       this.bailButton.click(this.bailRecordingMessage);
+      this.leaveButton.click(this.leaveRecordingMessage);
     }
 
     MessageRecorderControls.prototype.setButtonsReadyToStart = function() {
-      return enableButtons([this.startButton], [this.stopButton, this.bailButton]);
+      return enableButtons([this.startButton, this.leaveButton], [this.stopButton, this.bailButton]);
+    };
+
+    MessageRecorderControls.prototype.leaveRecordingMessage = function() {
+      return this.resetInitialStateCallback();
     };
 
     MessageRecorderControls.prototype.startRecordingMessage = function() {
@@ -358,7 +374,7 @@
       this.dataState = "no-data";
       this.errorMessage.html("");
       this.videoRecorder.startRecordingMedia(this.videoStream, this.recordingEndedCallback);
-      return enableButtons([this.stopButton, this.bailButton], [this.startButton]);
+      return enableButtons([this.stopButton, this.bailButton], [this.startButton, this.leaveButton]);
     };
 
     "Called whenever data is available. This can happen # ways:\n1. Because the user presses stop. Then, just reset the buttons and launch the video ready callback.\n2. Because the user presses bail. Then, reset the buttons and do nothing with the data.\n3. Because the user hits the max length time before pressing stop or bail. In this case, stop the video, show them a message and tell them to record again.\n4. As a result of #3, calling stop from this callback will trigger another callback, which needs to be ignored. This is the purpose of the datastate var.";

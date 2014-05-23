@@ -68,10 +68,13 @@ class window.VideoRecorder
 
   """Handles the mechanics of recording videos every 3 seconds."""
   constructor: ->
-    @curVideoBlob = null
-    @webcamConnected = false
+    @resetState()
     @videoWidth = 202  # 340
     @videoHeight = 150  # 255
+
+  resetState: =>
+    @curVideoBlob = null
+    @webcamConnected = false 
 
   connectWebcam: (successCallback, failureCallback) =>
     # whether to record video/audio
@@ -81,6 +84,7 @@ class window.VideoRecorder
 
     # callback for when we get video stream from user.
     onMediaSuccess = (videoStream) =>
+      @videoStream = videoStream
       @webcamConnected = true
       @mediaSuccessCallback(videoStream)
       successCallback(videoStream)
@@ -94,6 +98,9 @@ class window.VideoRecorder
     navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError)
 
   mediaSuccessCallback: (videoStream) =>
+    if not videoStream
+      console.error "Bad! Tried to record video with no video stream"
+      return
     # create video element, attach webcam videoStream to video element
     # Play a live stream of the person
     webcam_stream = document.getElementById('webcam_stream')
