@@ -23,7 +23,8 @@
 <body>
 
 <div class="sidenote-container">
-    
+    <!-- Send a message to the parent to close Sidenote. -->
+    <div class="close-sidenote" onclick="parent.postMessage('removeSidenote', '*');">&#10006;</div>
     <div id="sidenote-content" class="well">
         <div id="sidenote-header">
         	<h1>SideNote</h1>

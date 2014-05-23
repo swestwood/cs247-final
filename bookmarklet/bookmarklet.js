@@ -7,6 +7,24 @@ app_jquery_loading_script = document.createElement('script')
 app_jquery_loading_script.src = "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js";
 
 
+/* Listen for a message from Sidenote that it wants to close. */
+var iframeMessageDelete = function(e) {
+  console.log("MESSAGE RECEIVED parent")
+  console.log("ORIGIN: " + e.origin)
+  if (e.origin === 'http://localhost:5000' || e.origin === "https://sidenote.herokuapp.com")
+    if (e.data === "removeSidenote") {
+      $("#ssidenote-iframe").remove();
+      $("html").css({
+          paddingRight: 0,
+          overflow: "auto"
+      });
+      $("body").css("overflow", "auto");
+    }
+}
+window.addEventListener('message', iframeMessageDelete, false);
+
+
+
 app_jquery_loading_script.onload = function() {
 
     var frame = $("<iframe id='ssidenote-iframe'/>");

@@ -176,6 +176,22 @@ button {
     overflow-x: scroll;
 }
 
+.close-sidenote {
+    position: fixed;
+    top: 0px;
+    right: 10px;
+    cursor: pointer;
+    display: block;
+    width: 20px;
+    font-size: 1.4em;
+    text-align: center;
+    /*padding: 3px;*/
+    color: #555;
+}
+.close-sidenote:hover {
+    color: #999;
+}
+
 .wrapper {
     width: 320px; /* arbitary for demo only */
     white-space: nowrap;
