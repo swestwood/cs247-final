@@ -11,7 +11,9 @@ app_jquery_loading_script.src = "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jq
 var iframeMessageDelete = function(e) {
   console.log("MESSAGE RECEIVED parent")
   console.log("ORIGIN: " + e.origin)
-  if (e.origin === 'http://localhost:5000' || e.origin === "https://sidenote.herokuapp.com")
+  if (e.origin === 'http://localhost:5000' || e.origin === "https://sidenote.herokuapp.com"
+                                           || e.origin == "http://sidenote.herokuapp.com") {
+
     if (e.data === "removeSidenote") {
       $("#ssidenote-iframe").remove();
       $("html").css({
@@ -20,6 +22,7 @@ var iframeMessageDelete = function(e) {
       });
       $("body").css("overflow", "auto");
     }
+  }
 }
 window.addEventListener('message', iframeMessageDelete, false);
 
