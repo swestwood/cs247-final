@@ -3,6 +3,7 @@ console.log("app loaded")
 # Compatibility shim
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
+ENTER_KEYCODE = 13
 
 class App
 
@@ -36,22 +37,38 @@ class App
       return false
     return true
 
+
+  handleInputtedUserGroupInfo: =>
+    console.log("inputted info")
+    inputtedUser = $(".user-name-input").val().trim()
+    inputtedGroup = $(".group-name-input").val().trim()
+    if _.isEmpty(inputtedUser) or _.isEmpty(inputtedGroup)
+      $(".input-info-error").html("You need to enter both a user and a group.")
+      return  # Cannot be empty
+    localStorage.userName = _.escape(inputtedUser)
+    localStorage.groupName = _.escape(inputtedGroup)
+    if not @fetchGroupAndUserFromLocalStorage()
+      console.error("Something went wrong with setting local storage..")
+      return
+    @showSidenote()
+
   showSetGroupAndUser: =>
     $(".sidenote-app-content").hide()
     $('.set-group-user-wrapper').html(Templates["setGroupAndUserArea"]()).show()
+
+    $(".group-name-input").keypress (evt) =>
+      if (evt.which == ENTER_KEYCODE) 
+        console.log 'hand'
+        @handleInputtedUserGroupInfo()
+        return false 
+
+    $(".user-name-input").keypress (evt) =>
+      if (evt.which == ENTER_KEYCODE) 
+        $(".group-name-input").focus()  # Move focus to the next input, the group.
+        return false 
+
     $(".done-inputting-info").click (evt) =>
-      console.log("inputted info")
-      inputtedUser = $(".user-name-input").val().trim()
-      inputtedGroup = $(".group-name-input").val().trim()
-      if _.isEmpty(inputtedUser) or _.isEmpty(inputtedGroup)
-        $(".input-info-error").html("You need to enter both a user and a group.")
-        return  # Cannot be empty
-      localStorage.userName = _.escape(inputtedUser)
-      localStorage.groupName = _.escape(inputtedGroup)
-      if not @fetchGroupAndUserFromLocalStorage()
-        console.error("Something went wrong with setting local storage..")
-        return
-      @showSidenote()
+      @handleInputtedUserGroupInfo()
 
 
   showGroupAndUserName: =>
