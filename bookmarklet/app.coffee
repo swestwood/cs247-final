@@ -338,6 +338,8 @@ class window.FirebaseInteractor
     # Hash the group name so that we can allow spaces. Group names are CASE INSENSITIVE and ignore beginning/trailing whitespace
     groupNameFbKey = @hashString(@groupName.toLowerCase().trim())
     @fb_new_chat_room = @fb_instance.child('chatrooms').child(groupNameFbKey)
+    fb_group_name = @fb_new_chat_room.child('rawGroupName')  # Add raw group name
+    fb_group_name.set({'name': @groupName.toLowerCase()})
     @fb_instance_stream = @fb_new_chat_room.child('stream')   # TODO implement a limit
 
     # Set the room key as the trimmed rawUrl, but do not update the rawUrl itself so that links involving it still work.

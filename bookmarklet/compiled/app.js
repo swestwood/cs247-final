@@ -443,10 +443,14 @@
     };
 
     FirebaseInteractor.prototype.init = function() {
-      var groupNameFbKey, rawUrlFbKey;
+      var fb_group_name, groupNameFbKey, rawUrlFbKey;
       console.log(this.fb_instance);
       groupNameFbKey = this.hashString(this.groupName.toLowerCase().trim());
       this.fb_new_chat_room = this.fb_instance.child('chatrooms').child(groupNameFbKey);
+      fb_group_name = this.fb_new_chat_room.child('rawGroupName');
+      fb_group_name.set({
+        'name': this.groupName.toLowerCase()
+      });
       this.fb_instance_stream = this.fb_new_chat_room.child('stream');
       rawUrlFbKey = this.hashString(this.getKeyFromRawUrl(this.rawUrl));
       console.log("Raw URL key: " + rawUrlFbKey);
