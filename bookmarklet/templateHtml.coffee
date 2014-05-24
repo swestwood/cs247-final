@@ -38,7 +38,10 @@ window.buildTemplates = =>
                   <div id="messages-container">
                     <div class="loading-spinner-wrapper">
                       <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
-                      <div class="waiting-intertubes">Waiting on the intertubes for messages, <br /> or for you to post the first message!</div>
+                      <div class="waiting-intertubes">Waiting on the intertubes for messages,
+                        <br />or for you to post the first message!
+                        <br /><small><strong>(Must use <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> for video support!)</strong></small>
+                      </div>
                     </div>
                   </div>
                 </div>
