@@ -55,6 +55,8 @@ class App
   showSetGroupAndUser: =>
     $(".sidenote-app-content").hide()
     $('.set-group-user-wrapper').html(Templates["setGroupAndUserArea"]()).show()
+    $(".user-name-input").val(@userName) if @userName
+    $(".group-name-input").val(@groupName) if @groupName
 
     $(".group-name-input").keypress (evt) =>
       if (evt.which == ENTER_KEYCODE) 

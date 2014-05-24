@@ -72,6 +72,12 @@
       var _this = this;
       $(".sidenote-app-content").hide();
       $('.set-group-user-wrapper').html(Templates["setGroupAndUserArea"]()).show();
+      if (this.userName) {
+        $(".user-name-input").val(this.userName);
+      }
+      if (this.groupName) {
+        $(".group-name-input").val(this.groupName);
+      }
       $(".group-name-input").keypress(function(evt) {
         if (evt.which === ENTER_KEYCODE) {
           console.log('hand');
