@@ -38,7 +38,7 @@ window.buildTemplates = =>
                   <div id="messages-container">
                     <div class="loading-spinner-wrapper">
                       <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
-                      <div class="waiting-intertubes">Waiting on the intertubes, <br /> or for the first message to be posted...</div>
+                      <div class="waiting-intertubes">Waiting on the intertubes for messages, <br /> or for you to post the first message!</div>
                     </div>
                   </div>
                 </div>
@@ -53,7 +53,7 @@ window.buildTemplates = =>
               <div class="group-feed-container">
                 <div class="loading-spinner-wrapper">
                   <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
-                  <div class="waiting-intertubes">Waiting on the intertubes, <br /> or for the first message to be posted...</div>
+                  <div class="waiting-intertubes">Waiting on the intertubes for messages, <br /> or for you to post the first message!</div>
                 </div>
               </div>
           </div>
@@ -88,8 +88,8 @@ window.buildTemplates = =>
     <div><input type="text" class="user-name-input" placeholder="Name"></div>
     <div><input type="text" class="group-name-input" placeholder="Group"></div>
     <p>You'll share video messages within your group.</p>
-    <p>Try the group name <strong>CS247</strong>.</p>
     <button class="done-inputting-info">Done</button>
+    <div>Try the group name <strong>CS247</strong>, <br /> or come up with a new name and tell your friends!</div>
     <div class="input-info-error"> </div>
   </div
 
