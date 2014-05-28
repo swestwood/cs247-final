@@ -1,112 +1,181 @@
-body {
-    text-align: center;
-    /*font-family: Open Sans;*/
-    font-family: 'Open Sans';
-}
-p {
-    margin-top: 20px;
-    font-family: 'Open Sans';
-    /*font-family: 'Raleway';*/
-}
-h1 {
-    margin-top: -10px;
-    font-weight: 100;
-    /*font-family: 'Shadows Into Light', sans-serif;*/
-    font-size: 60px;
-}
+/* COLOR PALETTE
 
-button {
-    display: inline-block;
-    outline: 0px none;
-    color: #FFF;
-    background: none repeat scroll 0% 0% #4472B9;
-    white-space: nowrap;
-    border: 5px solid #4472B9 !important;
-    font-family: 'Raleway',sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    padding: 7px 16px !important;
-    line-height: 1.0;
-    position: relative;
-    border-radius: 10px;
-    box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.15);
-    transition: all 0.4s ease 0s;
-}
+    MAIN COLOR
+    #25ad98
+    dark: #59a196
+    #1a7869
+    light: #51dbc6
 
-#sidenote-header {
-    position:fixed;
-    margin-top: 0px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    height: 100px;
-}
+    LINK COLOR
+    #08c6a8
 
-.sidenote-metadata-wrapper {
-    position:fixed;
-    margin-top: 62px;
-    margin-left: -47%;
-    float:left;
-/*    border-bottom-style: solid;
-    border-bottom-width:1px;
-    border-bottom-color: #6669;*/
-    height: 40px;
-    display: inline-block;
-    width: 100%;
-    font-size: 15px;
-    font-family: 'Open Sans',sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    line-height: 1.0;
-    overflow: auto;
-}
+    RECORDING COLOR
+    #d94747
 
-.record-message-wrapper {
-    position: fixed;
-    margin-top: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color:white;
-    width: 100%;
-    z-index: 99;
-}
+    HEADER AND SUBSET
+    color: #85b3ac;
+    background-color: #dcf5f1;
+*/
 
-.stop-asking-video-button {
-    cursor: pointer; 
-    color: #888;
-}
+/* STANDARD FORMATTING */
+    body {
+        text-align: center;
+        font-family: 'Raleway';
+        font-size: 16px;
+    }
+    p {
+        margin-top: 20px;
+        font-size: 16px;
+        font-family: 'Raleway';
+    }
+    a {
+        color: #08c6a8;
+    }
+    button {
+        display: inline-block;
+        outline: 0px none;
+        color: #FFF;
+        background: none repeat scroll 0% 0% #25ad98; /*#4472B9;*/
+        white-space: nowrap;
+        border: 1px solid #25ad98 !important;
+        font-family: 'Raleway',sans-serif;
+        font-style: normal;
+        padding: 5px 10px !important;  /*padding: 7px 16px !important;*/
+        line-height: 1.0;
+        position: relative;
+        border-radius: 8px;
+        box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.15);
+        transition: all 0.4s ease 0s;
+    }
+    video {
+        width: 330px;
+    }
+    #title {
+        margin-top: -10px;
+        margin-left: 10px;
+        padding-bottom: 2px;
+        font-size:40px;
+        font-family: 'Raleway';
+        color: #25ad98;
+    }
 
+/* CHANGE NAME/GROUP PAGE */
+    #input-label {
+        margin-right: 8px;
+        margin-top: 10px;
+    }
+    #try-this-group {
+        width: 240px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #dcf5f1;
+        padding: 20px;
+    }
+    .set-group-and-user {
+        margin-top: 20px;
+    }
+    .change-user-group {
+    cursor: pointer;
+    font-weight: 200;
+    }
+
+/* ---------- MAIN PAGE ---------- */
+/* HEADER */
+    .metadata {
+        margin-right: -20px;
+        display: block;
+        color: #85b3ac;
+        background-color: #dcf5f1;
+    }
+    .metadata-names {
+        width: 85%;
+        height: 20px;
+        margin-top: 7px;
+        text-align: right;
+        float: left;
+        display:inline-block;
+        font-size: 14px;
+        overflow: auto;
+    }
+    .change-button {
+        display:inline-block;
+        width: 15%;
+        height: 25px;
+        font-size: 12px;
+        text-decoration: underline;
+        margin-top: 9px;
+    }
+    .user-name, .group-name {
+        color: #5d7d78; /* 3 shades darker than rest of header text */
+    }
+
+/* RECORD AREA */
+    .stop-asking-video-button {
+        font-style:normal;
+        color: #25ad98;
+        margin-left: 6px;
+    }
+    .their-video {
+        width: 250px;
+        height: auto;
+    }
+    .record-button {
+        margin-top: 20px; /* TODO hacky -- to get it to vertically align middle. 30px;*/
+        margin-bottom: 0px;
+        margin-left: 20px;
+        /* If we want the record button to be red */
+        /*background-color: #d94747;
+        border-color: #d94747 !important;*/
+    }
+    .record-stop-button {
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+    .record-start-button {
+        /* If we want the record button to be red */
+        /*background-color: #d94747;
+        border-color: #d94747 !important;*/
+        margin-top: 10px;
+        margin-bottom: 30px; /*successfully pushes down bottom inset */
+    }
+    #webcam-text {
+        margin: 22px;
+        margin-bottom: 23px; /* exactly the same height as "Record a message" so there's no movement */
+    }
+    .allow {
+        width:100px;
+        vertical-align: left;
+    }
+    #webcam_stream {
+        margin-top: 20px;
+    }
+
+/* FEED ARENA */
 .lower-section {
-    position: fixed;
-    color :black; 
-    margin-top: 315px; /*210px;*/
     margin-left: 10px;
-    padding-top: 10px;
-    /*margin-bottom: -50px;*/
-    width : 95%;
 }
 .lower-section-content {
     margin-top: 15px;
     /*background : linear-gradient(white,#f1f1f1);*/
     /*border : dotted 1px #4472B9;*/
-    border: solid 1px lightblue;
-    background-color: rgb(220, 246, 255);
-    overflow : auto;
-    height : 260px;
-
+    /*border: solid 1px #25ad98;*/
+    color: #85b3ac;
+    background-color: #dcf5f1;
+    overflow: auto;
+    height: 430px;
+    margin-top: -10px;
 }
 .tab-button-area button {
-    line-height: 1.0;
+    margin-top: 20px;
+    background-color: #53a296 !important;
+    border-color: #53a296 !important;
 }
 .tab-button-area button.active-content-btn {
-    background-color: rgb(173, 228, 246);
-    border-color: rgb(173, 228, 246) !important;
+    background-color: #53a296 !important;
+    border-color: #53a296 !important;
+    box-shadow: 0px 0px 3px 3px rgba(41,139,124,1);
 }
 
-.loading-spinner-wrapper {
-    color: rgb(82, 147, 168);
-}
 .loading-spinner {
     padding: 44px;
 }
@@ -121,60 +190,18 @@ button {
     -webkit-animation-duration: .8s;
     -moz-animation-duration: .8s;
 }
-.metadata-problem-instructions {
-    font-size: 70%;
-    float: right;
-    margin-right: 10%;
-}
+
 .group-name-wrapper, .user-name-wrapper {
     display: inline-block;
 }
-.group-name, .user-name {
-    font-weight: 600;
+.group-feed-container {
+    margin-top: 15px;
 }
-.messages-area-title {
-    font-size: 200%;
+.message-feed-elem {
+    padding-left: 20px;
+    padding-top: 6px;
 }
-
-.group-feed-area-title {
-    /*margin-top: 40px;*/
-    font-size: 200%;
-}
-
-.group-feed-area {
-    margin-left: 10px;
-}
-
-#messages-container {
-    display: inline;
-    /*float:left;
-    display:inline;
-    overflow:auto;
-    white-space: nowrap;
-    width:1000px;
-    height:210px;
-    border: 13px solid #bedeaa;
-    overflow-x: scroll;
-    /*overflow-y: hidden;  */
-}
-
-.messages-container-outer {
-    /*float:left;
-    display:inline;
-    width:500px;
-    height:300px;
-    overflow:auto;
-    white-space: nowrap;
-    width:530px;
-    height:210px;
-    border: 13px solid #bed5cd;
-    overflow-x: scroll;
-    /*overflow-y: hidden;  */  
-}
-
 .messages-container-inner {
-    /*width: 10000px;
-    display:inline;*/
     width: 320px; /* arbitary for demo only */
     white-space: nowrap;
     overflow-y: hidden;
@@ -184,13 +211,12 @@ button {
 .close-sidenote {
     position: fixed;
     top: 0px;
-    right: 10px;
+    right: 6px;
     cursor: pointer;
     display: block;
     width: 20px;
     font-size: 1.4em;
     text-align: center;
-    /*padding: 3px;*/
     color: #555;
 }
 .close-sidenote:hover {
@@ -205,28 +231,11 @@ button {
 }
 
 .recording-error-message, .record-overtime-error-message, .input-info-error {
-    color: red;
-}
-.metadata-problem-instructions {
-    padding-bottom: 10px;
-    padding-top: 2px;
-}
-.change-user-group {
-    cursor: pointer;
-    font-weight: 200;
-    color: #4472B9;
+    color: #d94747; /* red */
 }
 .done-inputting-info{
     margin-bottom:20px;
 }
-.allow {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.record-start-button {
-
-}
-
 .user {
     display: inline-block;
     text-align: center;
@@ -241,7 +250,6 @@ button {
 }
 .sample-user {
     color: #333;
-    /*background-color: lightblue;*/
 }
 .message-feed-elem {
     text-align: left;
@@ -253,7 +261,7 @@ button {
 }
 .vid-message-user {
     display: inline-block;
-    color: steelblue;
+    color: black;
 }
 .vid-message-timestamp {
     display: inline-block;
@@ -268,17 +276,9 @@ button {
 .waiting-message {
     margin: 20px;
 }
-
-.their-video {
-    width: 170px;
-    height: auto;
+.waiting-intertubes{
+    font-size: 14px;
 }
-.record-button {
-    margin-top: 100px; /* TODO hacky -- to get it to vertically align middle. 30px;*/
-    margin-bottom: 30px;
-
-}
-
 #video-container {
     display: none;
 }

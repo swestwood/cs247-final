@@ -6,14 +6,16 @@ window.buildTemplates = =>
   
   sidenoteAppContent = """
 
-  <div class="sidenote-metadata-wrapper">
+  <div class="metadata">
+    <div class="metadata-names">
       <div class="user-name-wrapper">
-          <span class="user-name">(unknown)</span>,
+      <span class="user-name">(unknown)</span>,
       </div>
       <div class="group-name-wrapper">
-          you're in <span class="group-name">(none)</span>.
+      you're in <span class="group-name">(none)</span>.
       </div>
-      <div class="metadata-problem-instructions">
+    </div>
+      <div class="change-button">
       <span class="change-user-group">change</span>
       </div>
   </div>
@@ -25,8 +27,8 @@ window.buildTemplates = =>
   <div class="lower-section">
 
     <div class="tab-button-area">
-      <button class="message-show-button active-content-btn">See Messages</button>
-      <button class="feed-show-button" >See Group Activity</button>
+      <button class="message-show-button active-content-btn">Messages</button>
+      <button class="feed-show-button">Group Activity</button>
     </div>
 
     <div class="lower-section-content">
@@ -38,8 +40,8 @@ window.buildTemplates = =>
                   <div id="messages-container">
                     <div class="loading-spinner-wrapper">
                       <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
-                      <div class="waiting-intertubes">Waiting on the intertubes for messages,
-                        <br />or for you to post the first message!
+                      <div class="waiting-intertubes">Waiting on the intertubes,
+                        <br />or for <strong>you</strong> to post the first message!
                         <br /><small><strong>(Must use <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> for video support!)</strong></small>
                       </div>
                     </div>
@@ -55,9 +57,12 @@ window.buildTemplates = =>
             {{!-- {{               <div class="group-feed-area-title">Group Activity</div>}} --}}
               <div class="group-feed-container">
                 <div class="loading-spinner-wrapper">
-                  <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
-                  <div class="waiting-intertubes">Waiting on the intertubes for messages, <br /> or for you to post the first message!</div>
-                </div>
+                      <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
+                      <div class="waiting-intertubes">Waiting on the intertubes,
+                        <br />or for <strong>you</strong> to post the first message!
+                        <br /><small><strong>(Must use <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> for video support!)</strong></small>
+                      </div>
+                    </div>
               </div>
           </div>
       </div>
@@ -88,11 +93,11 @@ window.buildTemplates = =>
 
   setGroupAndUserArea = """
   <div class="set-group-and-user">
-    <div><input type="text" class="user-name-input" placeholder="Name"></div>
-    <div><input type="text" class="group-name-input" placeholder="Group"></div>
+    <div><label id="input-label">Name</label><input type="text" class="user-name-input" placeholder="what they call you"></div>
+    <div><label id="input-label">Group</label><input type="text" class="group-name-input" placeholder="what you call them"></div>
     <p>You'll share video messages within your group.</p>
     <button class="done-inputting-info">Done</button>
-    <div>Try the group name <strong>CS247</strong>, <br /> or come up with a new name and tell your friends!</div>
+    <div id="try-this-group">Try the group name <strong>CS247</strong>, <br /> or come up with a new name and tell your friends!</div>
     <div class="input-info-error"> </div>
   </div
 
@@ -114,12 +119,9 @@ window.buildTemplates = =>
             <div id="webcam_stream">
                 <div id="sample-user-container">
                   <div id="sharing-video-help" style="display:none">
-                      <div class="sample-user place-user">
-                          <img class="allow" src="../bookmarklet/library/allow-me.png" alt="allow me" width="240" \>
-                      </div>
-                      <div>
+                      <div id="webcam-text">
                         <em>Please enable your webcam.
-                        <span class="stop-asking-video-button">(leave?)</span>
+                        <span class="stop-asking-video-button">back</span>
                         </em>
                       </div>
                   </div>
