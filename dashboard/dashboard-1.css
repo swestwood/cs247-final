@@ -11,9 +11,6 @@ p {
     font-size: 10pt;
 }
 
-/*a, figure {
-    display: inline-block;
-}*/
 figcaption {
     margin: 10px 0 0 0;
     font-variant: small-caps;
