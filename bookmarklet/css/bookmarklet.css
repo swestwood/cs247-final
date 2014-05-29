@@ -44,7 +44,7 @@
         line-height: 1.0;
         position: relative;
         border-radius: 8px;
-        box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.15);
+        /*box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.15);*/
         transition: all 0.4s ease 0s;
     }
     video {
@@ -114,6 +114,7 @@
         font-style:normal;
         color: #25ad98;
         margin-left: 6px;
+        cursor: pointer;
     }
     .their-video {
         width: 250px;
@@ -155,7 +156,6 @@
     margin-left: 10px;
 }
 .lower-section-content {
-    margin-top: 15px;
     /*background : linear-gradient(white,#f1f1f1);*/
     /*border : dotted 1px #4472B9;*/
     /*border: solid 1px #25ad98;*/
@@ -163,7 +163,9 @@
     background-color: #dcf5f1;
     overflow: auto;
     height: 430px;
-    margin-top: -10px;
+    margin-top: -5px;
+    padding-top: 5px;
+    padding-right: 7px;
 }
 .tab-button-area button {
     margin-top: 20px;
@@ -173,7 +175,7 @@
 .tab-button-area button.active-content-btn {
     background-color: #53a296 !important;
     border-color: #53a296 !important;
-    box-shadow: 0px 0px 3px 3px rgba(41,139,124,1);
+    box-shadow: 0px 0px 3px 3px rgba(41,139,124,0.6);
 }
 
 .loading-spinner {
@@ -195,8 +197,9 @@
     display: inline-block;
 }
 .group-feed-container {
-    margin-top: 15px;
+    margin-top: 20px;
 }
+
 .message-feed-elem {
     padding-left: 20px;
     padding-top: 6px;
