@@ -42,7 +42,7 @@ window.buildTemplates = =>
                       <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
                       <div class="waiting-intertubes">Waiting on the intertubes,
                         <br />or for <strong>you</strong> to post the first message!
-                        <br /><small><strong>(Must use <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> for video support!)</strong></small>
+                        <br /><small><strong>(Must use <a target="_blank" href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> for video support!)</strong></small>
                       </div>
                     </div>
                   </div>
@@ -60,7 +60,7 @@ window.buildTemplates = =>
                       <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
                       <div class="waiting-intertubes">Waiting on the intertubes,
                         <br />or for <strong>you</strong> to post the first message!
-                        <br /><small><strong>(Must use <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> for video support!)</strong></small>
+                        <br /><small><strong>(Must use <a target="_blank" href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> for video support!)</strong></small>
                       </div>
                     </div>
               </div>
