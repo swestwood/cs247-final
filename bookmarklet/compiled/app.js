@@ -182,6 +182,8 @@
       this.elem = elem;
       this.fbInteractor = fbInteractor;
       this.timestampUpdater = timestampUpdater;
+      this.addVideoMessage = __bind(this.addVideoMessage, this);
+      this.addTextMessage = __bind(this.addTextMessage, this);
       this.addMessage = __bind(this.addMessage, this);
       this.rerenderVideo = __bind(this.rerenderVideo, this);
       this.messageList = this.elem.find("#messages-container");
@@ -208,14 +210,35 @@
     };
 
     MessageList.prototype.addMessage = function(data) {
-      var messageTimestampClass, time, videoContext, videoElemClass, videoWrapperClass, wrapperContext;
+      var messageTimestampClass, time;
       if (this.elem.find(".loading-spinner")) {
         $(this.elem.find(".loading-spinner-wrapper")).hide();
       }
       messageTimestampClass = "messagetime-" + Math.floor(Math.random() * 100000000);
+      time = data.timestampMS ? this.timestampUpdater.timestampToOutputString(data.timestampMS) : "unknown time";
+      if (data.isText) {
+        this.addTextMessage(data, time, messageTimestampClass);
+      } else {
+        this.addVideoMessage(data, time, messageTimestampClass);
+      }
+      return this.timestampUpdater.addToUpdateMap(messageTimestampClass, data.timestampMS);
+    };
+
+    MessageList.prototype.addTextMessage = function(data, time, messageTimestampClass) {
+      var wrapperContext;
+      wrapperContext = {
+        messageTimestampClass: messageTimestampClass,
+        time: time,
+        textUser: data.user,
+        textMessage: data.textMessage
+      };
+      return $("#messages-container").prepend(Templates["textMessageElem"](wrapperContext));
+    };
+
+    MessageList.prototype.addVideoMessage = function(data, time, messageTimestampClass) {
+      var videoContext, videoElemClass, videoWrapperClass, wrapperContext;
       videoElemClass = "videoelem-" + Math.floor(Math.random() * 100000000);
       videoWrapperClass = "videowrapper-" + Math.floor(Math.random() * 100000000);
-      time = data.timestampMS ? this.timestampUpdater.timestampToOutputString(data.timestampMS) : "unknown time";
       wrapperContext = {
         messageTimestampClass: messageTimestampClass,
         time: time,
@@ -227,8 +250,7 @@
         videoUrl: URL.createObjectURL(BlobConverter.base64_to_blob(data.videoBlob)),
         videoElemClass: videoElemClass
       };
-      this.rerenderVideo(videoWrapperClass, videoContext);
-      return this.timestampUpdater.addToUpdateMap(messageTimestampClass, data.timestampMS);
+      return this.rerenderVideo(videoWrapperClass, videoContext);
     };
 
     return MessageList;
@@ -245,6 +267,8 @@
       this.respondRecordingError = __bind(this.respondRecordingError, this);
       this.showRecordingControls = __bind(this.showRecordingControls, this);
       this.respondRecordClick = __bind(this.respondRecordClick, this);
+      this.respondTextMessageInputted = __bind(this.respondTextMessageInputted, this);
+      this.processTextMessageInput = __bind(this.processTextMessageInput, this);
       this.setInitialState = __bind(this.setInitialState, this);
       this.videoRecorder = new VideoRecorder();
       this.setInitialState();
@@ -260,7 +284,39 @@
         $("#sharing-video-help").hide();
         return _this.recordButton.show();
       });
-      return this.recordButton.click(this.respondRecordClick);
+      this.recordButton.click(this.respondRecordClick);
+      this.textMessageToSendInput = this.elem.find(".text-message-input");
+      this.textMessageToSendInput.keypress(function(evt) {
+        if (evt.which === ENTER_KEYCODE) {
+          return _this.respondTextMessageInputted();
+        }
+      });
+      return $(".send-text-message-btn").click(this.respondTextMessageInputted);
+    };
+
+    MessageRecorder.prototype.processTextMessageInput = function(textEntered) {
+      console.log(textEntered);
+      this.fbInteractor.fb_page_videos.push({
+        isText: "true",
+        textMessage: textEntered,
+        user: this.userName,
+        timestampMS: (new Date()).toString()
+      });
+      return this.fbInteractor.fb_instance_stream.push({
+        rawUrl: this.rawUrl,
+        user: this.userName,
+        isText: "true",
+        timestampMS: (new Date()).toString(),
+        documentTitle: parentPageDocumentTitle || ""
+      });
+    };
+
+    MessageRecorder.prototype.respondTextMessageInputted = function(evt) {
+      var text;
+      text = this.textMessageToSendInput.val().trim();
+      if (text) {
+        return this.processTextMessageInput(_.escape(this.textMessageToSendInput.val().trim()));
+      }
     };
 
     "Launches asking permission from the webcam to record a message. Only needs to happen once.";

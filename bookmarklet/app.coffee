@@ -160,9 +160,28 @@ class window.MessageList
     $(@elem.find(".loading-spinner-wrapper")).hide() if @elem.find(".loading-spinner")
     # hacky classes to identify elements after rendering them
     messageTimestampClass = "messagetime-"+Math.floor(Math.random()*100000000)
+    time = if data.timestampMS then @timestampUpdater.timestampToOutputString(data.timestampMS) else "unknown time";
+
+    if data.isText
+      @addTextMessage(data, time, messageTimestampClass)
+    else
+      @addVideoMessage(data, time, messageTimestampClass)
+    @timestampUpdater.addToUpdateMap(messageTimestampClass, data.timestampMS)
+
+
+  addTextMessage: (data, time, messageTimestampClass) =>
+    wrapperContext =
+      messageTimestampClass: messageTimestampClass
+      time: time
+      textUser: data.user
+      textMessage: data.textMessage
+    $("#messages-container").prepend(Templates["textMessageElem"](wrapperContext))
+
+
+
+  addVideoMessage: (data, time, messageTimestampClass) =>
     videoElemClass = "videoelem-"+Math.floor(Math.random()*100000000)
     videoWrapperClass = "videowrapper-"+Math.floor(Math.random()*100000000)
-    time = if data.timestampMS then @timestampUpdater.timestampToOutputString(data.timestampMS) else "unknown time";
     wrapperContext =
       messageTimestampClass: messageTimestampClass
       time: time
@@ -175,7 +194,6 @@ class window.MessageList
       videoElemClass: videoElemClass
     
     @rerenderVideo(videoWrapperClass, videoContext)
-    @timestampUpdater.addToUpdateMap(messageTimestampClass, data.timestampMS)
 
 class window.MessageRecorder
 
@@ -186,12 +204,32 @@ class window.MessageRecorder
   setInitialState: =>
     @elem.html(Templates["recordMessageArea"]())
     @recordButton = $(@elem.find(".record-button"))
+
     @videoRecorder.resetState()
     @webcam_stream_container = $(@elem.find('.webcam_stream_container'))
     $(".stop-asking-video-button").click (evt) =>
       $("#sharing-video-help").hide()
       @recordButton.show()
     @recordButton.click(@respondRecordClick)
+    @textMessageToSendInput = @elem.find(".text-message-input")
+
+    @textMessageToSendInput.keypress (evt) =>
+      if (evt.which == ENTER_KEYCODE)
+        @respondTextMessageInputted()
+
+    $(".send-text-message-btn").click(@respondTextMessageInputted)
+
+
+  processTextMessageInput: (textEntered) =>
+    console.log textEntered
+    @fbInteractor.fb_page_videos.push({isText: "true", textMessage: textEntered, user: @userName, timestampMS: (new Date()).toString()})
+    @fbInteractor.fb_instance_stream.push({rawUrl: @rawUrl, user: @userName,  isText: "true", timestampMS: (new Date()).toString(), documentTitle: parentPageDocumentTitle || ""})
+
+  respondTextMessageInputted: (evt) =>
+    text = @textMessageToSendInput.val().trim()
+    if text
+      @processTextMessageInput(_.escape(@textMessageToSendInput.val().trim()))
+
 
   """Launches asking permission from the webcam to record a message. Only needs to happen once."""
   respondRecordClick: (evt) =>
@@ -205,7 +243,7 @@ class window.MessageRecorder
       # actually hit this else condition.
       console.log "webcam already connected"
       @videoRecorder.mediaSuccessCallback(@videoRecorder.videoStream)
-      @showRecordingControls() 
+      @showRecordingControls()
 
 
   showRecordingControls: (videoStream) =>

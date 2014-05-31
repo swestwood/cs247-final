@@ -77,16 +77,29 @@ window.buildTemplates = =>
   <video class="{{videoElemClass}}" controls="true" width=200><source src="{{videoUrl}}" type="video/webm"></video>
   """
 
+  textMessageElem = """
+    <div class="text-message-wrapper">
+      <div class="text-message-info">
+        <div class="text-message-user">{{textUser}}</div>
+        <div class="text-message-timestamp {{messageTimestampClass}}">{{time}}</div>
+      </div>
+      <div class="text-wrapper">
+        <span class="text-message-in-feed">{{textMessage}}</span>
+      </div>
+    </div>
+  """
+
   # Video message elem guesses at the video height (seems to be working) again to help with the jumping in rerendering.
   videoMessageElem = """
   <div class="vid-message-wrapper">
     <div class="vid-rerender-wrapper">
-    <div class="vid-message-info">
-      <div class="vid-message-user">{{videoUser}}</div>
-      <div class="vid-message-timestamp {{messageTimestampClass}}">{{time}}</div>
-    </div>
-    <div class="vid_wrapper  {{videoWrapperClass}}" style="min-height:145px">
- 
+      <div class="vid-message-info">
+        <div class="vid-message-user">{{videoUser}}</div>
+        <div class="vid-message-timestamp {{messageTimestampClass}}">{{time}}</div>
+      </div>
+      <div class="vid_wrapper  {{videoWrapperClass}}" style="min-height:145px">
+   
+      </div>
     </div>
   </div>
   """
@@ -95,7 +108,7 @@ window.buildTemplates = =>
   <div class="set-group-and-user">
     <div><label id="input-label">Name</label><input type="text" class="user-name-input" placeholder="what they call you"></div>
     <div><label id="input-label">Group</label><input type="text" class="group-name-input" placeholder="what you call them"></div>
-    <p>You'll share video messages within your group.</p>
+    <p>You'll share text and video messages within your group.</p>
     <button class="done-inputting-info">Done</button>
     <div id="try-this-group">Try the group name <strong>CS247</strong>, <br /> or come up with a new name and tell your friends!</div>
     <div class="input-info-error"> </div>
@@ -114,7 +127,13 @@ window.buildTemplates = =>
   recordMessageArea = """
   <div class="record-message-area">
       <div class="record-message-container">
-          <button class="record-button">Record a message</button>
+          <button class="record-button"><i class="fa fa-video-camera fa-2x"></i></button>
+          <div class="text-message-container">
+            <div>
+              <input type="text" class="text-message-input" placeholder="Share with a message?">
+              <button class="send-text-message-btn">Send</button>
+            </div>
+          </div>
           <div class="webcam_stream_container">
             <div id="webcam_stream">
                 <div id="sample-user-container">
@@ -154,6 +173,7 @@ window.buildTemplates = =>
     "messageFeedElem": messageFeedElem
     "videoMessageElem": videoMessageElem
     "videoElement": videoElement
+    "textMessageElem": textMessageElem
   return handlebarsElems
 
 # Access templates via window.Templates["quiz"] for example, depending on the name given in
@@ -161,3 +181,5 @@ window.buildTemplates = =>
 window.Templates = {}
 for name, templateStr of window.buildTemplates()
   window.Templates[name] = Handlebars.compile(templateStr)
+
+
