@@ -40,9 +40,8 @@ window.buildTemplates = =>
                   <div id="messages-container">
                     <div class="loading-spinner-wrapper">
                       <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
-                      <div class="waiting-intertubes">Waiting on the intertubes,
+                      <div class="waiting-intertubes">Waiting on the intertubes for others,
                         <br />or for <strong>you</strong> to post the first message!
-                        <br /><small><strong>(Must use <a target="_blank" href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> for video support!)</strong></small>
                       </div>
                     </div>
                   </div>
@@ -58,9 +57,8 @@ window.buildTemplates = =>
               <div class="group-feed-container">
                 <div class="loading-spinner-wrapper">
                       <i class="loading-spinner fa fa-spinner fa-spin fa-3x"></i>
-                      <div class="waiting-intertubes">Waiting on the intertubes,
+                      <div class="waiting-intertubes">Waiting on the intertubes for others,
                         <br />or for <strong>you</strong> to post the first message!
-                        <br /><small><strong>(Must use <a target="_blank" href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> for video support!)</strong></small>
                       </div>
                     </div>
               </div>
@@ -127,13 +125,22 @@ window.buildTemplates = =>
   recordMessageArea = """
   <div class="record-message-area">
       <div class="record-message-container">
+        {{#if isFirefox}}
           <button class="record-button"><i class="fa fa-video-camera fa-2x"></i></button>
+        {{/if}}
+
           <div class="text-message-container">
             <div>
               <input type="text" class="text-message-input" placeholder="Share with a message?">
               <button class="send-text-message-btn">Send</button>
             </div>
           </div>
+          {{#unless isFirefox}}
+          <div class="message-no-vid-recording">
+            <i class="fa fa-video-camera"></i> Note that video recording only works in <a target="_blank" href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>.
+          </div>
+          {{/unless}}
+
           <div class="webcam_stream_container">
             <div id="webcam_stream">
                 <div id="sample-user-container">

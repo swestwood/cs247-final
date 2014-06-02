@@ -258,7 +258,17 @@
     margin-top: 9px;
 }
 
+.message-no-vid-recording {
+    margin-top: 10px;
+    font-size: .8em;
+    color: #AAA;
+}
 
+.text-message-input {
+    width: 240px;
+    text-align: left;
+    padding-left: 4px;
+}
 .text-message-container {
     margin-top: 10px;
 }

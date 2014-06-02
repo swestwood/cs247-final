@@ -3,6 +3,8 @@ console.log("app loaded")
 # Compatibility shim
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
+isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+
 ENTER_KEYCODE = 13
 
 class App
@@ -202,7 +204,7 @@ class window.MessageRecorder
     @setInitialState()
 
   setInitialState: =>
-    @elem.html(Templates["recordMessageArea"]())
+    @elem.html(Templates["recordMessageArea"]({"isFirefox": isFirefox}))
     @recordButton = $(@elem.find(".record-button"))
 
     @videoRecorder.resetState()
@@ -401,6 +403,7 @@ window.addEventListener('message', iframeMessageReceiver, false);
 
 
 $(document).ready ->
+  console.log "IS firefox: " + isFirefox
   app = new App($(".sidenote-container"))
 
 
