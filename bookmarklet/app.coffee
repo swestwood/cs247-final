@@ -84,6 +84,7 @@ class App
     
   showSidenote: =>
     $(".sidenote-app-content").html(Templates["sidenoteAppContent"]())
+    @fbInteractor.removeAllListeners() if @fbInteractor # Remove listeners from the current fb interactor
     @showGroupAndUserName()
     @fbInteractor = new FirebaseInteractor(@groupName, @rawUrl)
     @fbInteractor.init()
@@ -145,6 +146,7 @@ class window.MessageList
     @fbInteractor.fb_page_videos.on "child_added", (snapshot) =>
       if snapshot and snapshot.val()
         @addMessage(snapshot.val())
+
 
   # Rerender the video so it can be replayed, since Firefox fails at allowing video playback
   # despite the controls
@@ -357,6 +359,11 @@ class window.FirebaseInteractor
   constructor: (@groupName, @rawUrl) ->
     @fb_instance = new Firebase("https://sidenote.firebaseio.com")
     console.log "hash url: " + @hashString(@rawUrl)
+
+  removeAllListeners: =>
+    @fb_new_chat_room.off()
+    @fb_instance_stream.off()
+    @fb_page_videos.off()
 
   hashString: (s) =>
     console.log 'hashing: '+ s

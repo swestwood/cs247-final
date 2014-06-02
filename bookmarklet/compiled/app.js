@@ -110,6 +110,9 @@
     App.prototype.showSidenote = function() {
       var _this = this;
       $(".sidenote-app-content").html(Templates["sidenoteAppContent"]());
+      if (this.fbInteractor) {
+        this.fbInteractor.removeAllListeners();
+      }
       this.showGroupAndUserName();
       this.fbInteractor = new FirebaseInteractor(this.groupName, this.rawUrl);
       this.fbInteractor.init();
@@ -487,9 +490,16 @@
       this.init = __bind(this.init, this);
       this.getKeyFromRawUrl = __bind(this.getKeyFromRawUrl, this);
       this.hashString = __bind(this.hashString, this);
+      this.removeAllListeners = __bind(this.removeAllListeners, this);
       this.fb_instance = new Firebase("https://sidenote.firebaseio.com");
       console.log("hash url: " + this.hashString(this.rawUrl));
     }
+
+    FirebaseInteractor.prototype.removeAllListeners = function() {
+      this.fb_new_chat_room.off();
+      this.fb_instance_stream.off();
+      return this.fb_page_videos.off();
+    };
 
     FirebaseInteractor.prototype.hashString = function(s) {
       console.log('hashing: ' + s);
