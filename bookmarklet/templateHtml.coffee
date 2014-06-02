@@ -104,9 +104,9 @@ window.buildTemplates = =>
 
   setGroupAndUserArea = """
   <div class="set-group-and-user">
-    <div><label id="input-label">Name</label><input type="text" class="user-name-input" placeholder="what they call you"></div>
-    <div><label id="input-label">Group</label><input type="text" class="group-name-input" placeholder="what you call them"></div>
-    <p>You'll share text and video messages within your group.</p>
+    <div><label id="input-label">Name</label><input type="text" class="user-name-input" placeholder="your name"></div>
+    <div><label id="input-label">Group</label><input type="text" class="group-name-input" placeholder="your group"></div>
+    <p>You'll share messages just within your group.</p>
     <button class="done-inputting-info">Done</button>
     <div id="try-this-group">Try the group name <strong>CS247</strong>, <br /> or come up with a new name and tell your friends!</div>
     <div class="input-info-error"> </div>
