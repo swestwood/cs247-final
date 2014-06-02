@@ -230,7 +230,7 @@ class window.MessageRecorder
   respondTextMessageInputted: (evt) =>
     text = @textMessageToSendInput.val().trim()
     if text
-      @processTextMessageInput(_.escape(@textMessageToSendInput.val().trim()))
+      @processTextMessageInput(@textMessageToSendInput.val().trim())
 
 
   """Launches asking permission from the webcam to record a message. Only needs to happen once."""
