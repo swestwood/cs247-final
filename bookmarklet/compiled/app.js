@@ -319,7 +319,7 @@
       var text;
       text = this.textMessageToSendInput.val().trim();
       if (text) {
-        return this.processTextMessageInput(_.escape(this.textMessageToSendInput.val().trim()));
+        return this.processTextMessageInput(this.textMessageToSendInput.val().trim());
       }
     };
 
