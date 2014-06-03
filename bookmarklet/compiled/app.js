@@ -303,6 +303,7 @@
 
     MessageRecorder.prototype.processTextMessageInput = function(textEntered) {
       console.log(textEntered);
+      $(this.textMessageToSendInput).val("");
       this.fbInteractor.fb_page_videos.push({
         isText: "true",
         textMessage: textEntered,

@@ -226,6 +226,7 @@ class window.MessageRecorder
 
   processTextMessageInput: (textEntered) =>
     console.log textEntered
+    $(@textMessageToSendInput).val("")
     @fbInteractor.fb_page_videos.push({isText: "true", textMessage: textEntered, user: @userName, timestampMS: (new Date()).toString()})
     @fbInteractor.fb_instance_stream.push({rawUrl: @rawUrl, user: @userName,  isText: "true", timestampMS: (new Date()).toString(), documentTitle: parentPageDocumentTitle || ""})
 
