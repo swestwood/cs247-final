@@ -27,7 +27,7 @@ window.buildTemplates = =>
   <div class="lower-section">
 
     <div class="tab-button-area">
-      <button class="message-show-button active-content-btn">Messages</button>
+      <button class="message-show-button active-content-btn">On This Page</button>
       <button class="feed-show-button">Group Activity</button>
     </div>
 
