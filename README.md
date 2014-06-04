@@ -1,7 +1,7 @@
-cs247-final
+Final Project for Stanford CS247 (Human-Computer Interaction Design Studio)
 ===========
 
-CS247, Spring 2014 project.
+Spring 2014.
 
 ### Live
 
