@@ -3,8 +3,11 @@ cs247-final
 
 CS247, Spring 2014 project.
 
+### Live
 
-Notes on running the project:
+http://sidenote.herokuapp.com/
+
+##### Notes on running the project as a developer:
 
 Start the NodeJS server via `node server` in the cs247-final main directory.
 
@@ -16,4 +19,4 @@ Check bookmarklet.js to be sure you are loading in the frame from localhost rath
 
 Be sure you are using the localhost bookmarklet. Check that your bookmarklet is running the localhost version of bookmarklet.js rather than the live version, changing dashboard/index.html if needed temporarily to install a localhost bookmarklet as well. Once you install the bookmarklet, you do not need to reinstall it after changes.
 
-Always open Sidenote on a non-HTTPS site when running locally, such as xkcd or Wikipedia. Otherwise, the HTTPS page will likely refuse to load content from a non-HTTPS site and it will not work.
+Always open Sidenote on a non-HTTPS site when running locally, such as xkcd or Wikipedia. Otherwise, the HTTPS page will refuse to load content from a non-HTTPS site and it will not work.
