@@ -7,6 +7,10 @@ CS247, Spring 2014 project.
 
 http://sidenote.herokuapp.com/
 
+
+![Poster](http://i.imgur.com/HWV3nMe.png)
+
+
 ##### Notes on running the project as a developer:
 
 Start the NodeJS server via `node server` in the cs247-final main directory.
